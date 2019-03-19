@@ -5,13 +5,11 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class SwingPaint {
 
-    JButton clearBtn, blackBtn, blueBtn, greenBtn, redBtn, magentaBtn;
+    JButton clearBtn, blackBtn, blueBtn, greenBtn, redBtn, magentaBtn, rectBtn, ellipseBtn;
     DrawArea drawArea;
     ActionListener actionListener = new ActionListener() {
 
@@ -64,6 +62,23 @@ public class SwingPaint {
         magentaBtn = new JButton("Magenta");
         magentaBtn.addActionListener(actionListener);
 
+        ButtonGroup RadioGroup = new ButtonGroup();
+
+        JRadioButton lineBtn = new JRadioButton("Line");
+        lineBtn.addActionListener(actionListener);
+        JRadioButton rectBtn = new JRadioButton("Rectangle");
+        rectBtn.addActionListener(actionListener);
+        JRadioButton ellipseBtn = new JRadioButton("Ellipse");
+        ellipseBtn.addActionListener(actionListener);
+
+        rectBtn.setSelected(true);
+
+        RadioGroup.add(lineBtn);
+        RadioGroup.add(rectBtn);
+        RadioGroup.add(ellipseBtn);
+
+
+
         // add to panel
         controls.add(greenBtn);
         controls.add(blueBtn);
@@ -71,11 +86,15 @@ public class SwingPaint {
         controls.add(redBtn);
         controls.add(magentaBtn);
         controls.add(clearBtn);
+        controls.add(lineBtn );
+        controls.add(rectBtn );
+        controls.add(ellipseBtn );
+
 
         // add to content pane
         content.add(controls, BorderLayout.NORTH);
 
-        frame.setSize(600, 600);
+        frame.setSize(800, 600);
         // can close frame
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // show the swing paint result
