@@ -9,6 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.Rectangle;
+import java.awt.geom.Ellipse2D;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 
@@ -41,7 +42,7 @@ public class DrawArea extends JComponent {
                 if (g2 != null) {
                     // draw line if g2 context not null
                     if(test==1){g2.drawRect(oldX, oldY, 100, 50);}
-                    else if(test==2){g2.drawOval(oldX, oldY, 100, 50);}
+                    else if(test==2){}
 
                     // refresh draw area to repaint
                     repaint();
@@ -78,14 +79,6 @@ public class DrawArea extends JComponent {
     }
 
     // now we create exposed methods
-    public void clear() {
-        g2.setPaint(Color.white);
-        // draw white on entire draw area to clear
-        g2.fillRect(0, 0, getSize().width, getSize().height);
-        g2.setPaint(Color.black);
-        repaint();
-    }
-
     public void ellipse(){test=2;}
     public void rect(){test=1;}
 

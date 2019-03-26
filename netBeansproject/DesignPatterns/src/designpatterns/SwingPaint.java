@@ -11,14 +11,12 @@ import javax.swing.*;
 
 public class SwingPaint {
 
-    JButton clearBtn, ellipseBtn, rectBtn; 
+    JButton ellipseBtn, rectBtn; 
     DrawArea drawArea;
     ActionListener actionListener = new ActionListener() {
 
         public void actionPerformed(ActionEvent e) {
-            if (e.getSource() == clearBtn) {
-                drawArea.clear();
-            }else if (e.getSource() == ellipseBtn) {
+            if (e.getSource() == ellipseBtn) {
                 drawArea.ellipse();
             } else if (e.getSource() == rectBtn) {
                 drawArea.rect();
@@ -45,9 +43,6 @@ public class SwingPaint {
         // create controls to apply colors and call clear feature
         JPanel controls = new JPanel();
 
-        clearBtn = new JButton("Clear");
-        clearBtn.addActionListener(actionListener);
-
         rectBtn = new JButton("Rectangle");
         rectBtn.addActionListener(actionListener);
         ellipseBtn = new JButton("Ellipse");
@@ -58,8 +53,6 @@ public class SwingPaint {
 
 
         // add to panel
-
-        controls.add(clearBtn);
         controls.add(rectBtn);
         controls.add(ellipseBtn);
 
