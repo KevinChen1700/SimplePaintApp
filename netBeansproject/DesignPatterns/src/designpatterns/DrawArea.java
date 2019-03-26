@@ -9,6 +9,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.geom.Rectangle2D;
 
 import javax.swing.JComponent;
 
@@ -26,14 +28,11 @@ public class DrawArea extends JComponent {
     private Graphics2D g2;
     // Mouse coordinates
     private int currentX, currentY, oldX, oldY;
-    private boolean isRect;
-  
-    
-    
+    private int test=0;
 
-    public DrawArea() {
-        isRect=true;
+    public DrawArea() {       
         setDoubleBuffered(false);
+
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 // save coord x,y when mouse is pressed
@@ -41,8 +40,9 @@ public class DrawArea extends JComponent {
                 oldY = e.getY();
                 if (g2 != null) {
                     // draw line if g2 context not null
-                    if(isRect == true){g2.drawRect(oldX, oldY, 150, 150);}
-                    
+                    if(test==1){g2.drawRect(oldX, oldY, 100, 50);}
+                    else if(test==2){g2.drawOval(oldX, oldY, 100, 50);}
+
                     // refresh draw area to repaint
                     repaint();
                     // store current coords x,y as olds x,y
@@ -57,11 +57,8 @@ public class DrawArea extends JComponent {
             public void mouseDragged(MouseEvent e) {
                 // coord x,y when drag mouse
                 currentX = e.getX();
-                currentY = e.getY();
-
-                
-            }
-            
+                currentY = e.getY();             
+            }           
         });
     }
 
@@ -77,6 +74,7 @@ public class DrawArea extends JComponent {
         }
 
         g.drawImage(image, 0, 0, null);
+        
     }
 
     // now we create exposed methods
@@ -88,27 +86,7 @@ public class DrawArea extends JComponent {
         repaint();
     }
 
-    public void red() {
-        // apply red color on g2 context
-        g2.setPaint(Color.red);
-    }
-
-    public void black() {
-        g2.setPaint(Color.black);
-    }
-
-    public void magenta() {
-        g2.setPaint(Color.magenta);
-    }
-
-    public void green() {
-        g2.setPaint(Color.green);
-    }
-
-    public void blue() {
-        g2.setPaint(Color.blue);
-    }
-    public void ellipse(){isRect=true;}
-    public void rect(){isRect=true;}
+    public void ellipse(){test=2;}
+    public void rect(){test=1;}
 
 }

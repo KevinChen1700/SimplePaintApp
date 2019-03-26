@@ -11,24 +11,14 @@ import javax.swing.*;
 
 public class SwingPaint {
 
-    JButton clearBtn, blackBtn, blueBtn, greenBtn, redBtn, magentaBtn, ellipseBtn, rectBtn; 
+    JButton clearBtn, ellipseBtn, rectBtn; 
     DrawArea drawArea;
     ActionListener actionListener = new ActionListener() {
 
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == clearBtn) {
                 drawArea.clear();
-            } else if (e.getSource() == blackBtn) {
-                drawArea.black();
-            } else if (e.getSource() == blueBtn) {
-                drawArea.blue();
-            } else if (e.getSource() == greenBtn) {
-                drawArea.green();
-            } else if (e.getSource() == redBtn) {
-                drawArea.red();
-            } else if (e.getSource() == magentaBtn) {
-                drawArea.magenta();
-            } else if (e.getSource() == ellipseBtn) {
+            }else if (e.getSource() == ellipseBtn) {
                 drawArea.ellipse();
             } else if (e.getSource() == rectBtn) {
                 drawArea.rect();
@@ -57,37 +47,18 @@ public class SwingPaint {
 
         clearBtn = new JButton("Clear");
         clearBtn.addActionListener(actionListener);
-        blackBtn = new JButton("Black");
-        blackBtn.addActionListener(actionListener);
-        blueBtn = new JButton("Blue");
-        blueBtn.addActionListener(actionListener);
-        greenBtn = new JButton("Green");
-        greenBtn.addActionListener(actionListener);
-        redBtn = new JButton("Red");
-        redBtn.addActionListener(actionListener);
-        magentaBtn = new JButton("Magenta");
-        magentaBtn.addActionListener(actionListener);
 
-        ButtonGroup RadioGroup = new ButtonGroup();
-
-        JRadioButton rectBtn = new JRadioButton("Rectangle");
+        rectBtn = new JButton("Rectangle");
         rectBtn.addActionListener(actionListener);
-        JRadioButton ellipseBtn = new JRadioButton("Ellipse");
+        ellipseBtn = new JButton("Ellipse");
         ellipseBtn.addActionListener(actionListener);
 
         rectBtn.setSelected(true);
 
-        RadioGroup.add(rectBtn);
-        RadioGroup.add(ellipseBtn);
-
 
 
         // add to panel
-        controls.add(greenBtn);
-        controls.add(blueBtn);
-        controls.add(blackBtn);
-        controls.add(redBtn);
-        controls.add(magentaBtn);
+
         controls.add(clearBtn);
         controls.add(rectBtn);
         controls.add(ellipseBtn);
