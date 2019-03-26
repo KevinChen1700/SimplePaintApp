@@ -11,7 +11,7 @@ import javax.swing.*;
 
 public class SwingPaint {
 
-    JButton clearBtn, blackBtn, blueBtn, greenBtn, redBtn, magentaBtn;
+    JButton clearBtn, blackBtn, blueBtn, greenBtn, redBtn, magentaBtn, ellipseBtn, rectBtn; 
     DrawArea drawArea;
     ActionListener actionListener = new ActionListener() {
 
@@ -28,6 +28,10 @@ public class SwingPaint {
                 drawArea.red();
             } else if (e.getSource() == magentaBtn) {
                 drawArea.magenta();
+            } else if (e.getSource() == ellipseBtn) {
+                drawArea.ellipse();
+            } else if (e.getSource() == rectBtn) {
+                drawArea.rect();
             }
         }
     };
@@ -66,8 +70,6 @@ public class SwingPaint {
 
         ButtonGroup RadioGroup = new ButtonGroup();
 
-        JRadioButton lineBtn = new JRadioButton("Line");
-        lineBtn.addActionListener(actionListener);
         JRadioButton rectBtn = new JRadioButton("Rectangle");
         rectBtn.addActionListener(actionListener);
         JRadioButton ellipseBtn = new JRadioButton("Ellipse");
@@ -75,7 +77,6 @@ public class SwingPaint {
 
         rectBtn.setSelected(true);
 
-        RadioGroup.add(lineBtn);
         RadioGroup.add(rectBtn);
         RadioGroup.add(ellipseBtn);
 
@@ -88,9 +89,8 @@ public class SwingPaint {
         controls.add(redBtn);
         controls.add(magentaBtn);
         controls.add(clearBtn);
-        controls.add(lineBtn );
-        controls.add(rectBtn );
-        controls.add(ellipseBtn );
+        controls.add(rectBtn);
+        controls.add(ellipseBtn);
 
 
         // add to content pane

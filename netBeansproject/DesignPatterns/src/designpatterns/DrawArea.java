@@ -26,14 +26,30 @@ public class DrawArea extends JComponent {
     private Graphics2D g2;
     // Mouse coordinates
     private int currentX, currentY, oldX, oldY;
+    private boolean isRect;
+  
+    
+    
 
     public DrawArea() {
+        isRect=true;
         setDoubleBuffered(false);
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 // save coord x,y when mouse is pressed
                 oldX = e.getX();
                 oldY = e.getY();
+                if (g2 != null) {
+                    // draw line if g2 context not null
+                    if(isRect == true){g2.drawRect(oldX, oldY, 150, 150);}
+                    
+                    // refresh draw area to repaint
+                    repaint();
+                    // store current coords x,y as olds x,y
+                    oldX = currentX;
+                    oldY = currentY;
+                }
+                
             }
         });
 
@@ -43,16 +59,9 @@ public class DrawArea extends JComponent {
                 currentX = e.getX();
                 currentY = e.getY();
 
-                if (g2 != null) {
-                    // draw line if g2 context not null
-                    g2.drawLine(oldX, oldY, currentX, currentY);
-                    // refresh draw area to repaint
-                    repaint();
-                    // store current coords x,y as olds x,y
-                    oldX = currentX;
-                    oldY = currentY;
-                }
+                
             }
+            
         });
     }
 
@@ -99,5 +108,7 @@ public class DrawArea extends JComponent {
     public void blue() {
         g2.setPaint(Color.blue);
     }
+    public void ellipse(){isRect=true;}
+    public void rect(){isRect=true;}
 
 }
