@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package simplepaintapp;
 
 import java.awt.*;
@@ -11,10 +6,6 @@ import java.io.IOException;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-/**
- *
- * @author Sjimmie
- */
 public class MyRectangle implements Paint {
 
     private Rectangle rect;
@@ -27,13 +18,9 @@ public class MyRectangle implements Paint {
         this.rect = r;
     }    
 
+    @Override
     public void makeObject(Point startDrag, Point endDrag) {
         Rectangle r = new Rectangle(Math.min(startDrag.x, endDrag.x), Math.min(startDrag.y, endDrag.y), Math.abs(startDrag.x - endDrag.x), Math.abs(startDrag.y - endDrag.y));
-        this.setRect(r);
-    }
-
-    public void makeRectangle(int x, int y, int w, int h) {
-        Rectangle r = new Rectangle(x, y, w, h);
         this.setRect(r);
     }
 

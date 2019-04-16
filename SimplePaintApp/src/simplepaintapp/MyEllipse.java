@@ -8,16 +8,16 @@ import java.io.IOException;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-public class MyEllipse implements Paint {
+public class MyEllipse implements DrawAbleShape {
 
-    private Ellipse2D elip2d;
+    private Ellipse2D elip;
 
     public MyEllipse() {
 
     }
 
     public MyEllipse(Ellipse2D e) {
-        this.elip2d = e;
+        this.elip = e;
     }
 
     @Override
@@ -39,12 +39,12 @@ public class MyEllipse implements Paint {
     //draws a resized version of the object but this version can't have a width and/or height of less than 1
     @Override
     public void drawExpand(Graphics2D g, int w, int h ) {
-        w = (int) elip2d.getWidth() + w;
-        h = (int) elip2d.getHeight() + h;
+        w = (int) elip.getWidth() + w;
+        h = (int) elip.getHeight() + h;
         if(w<1)w=1;
         if(h<1)h=1;
 
-        g.drawOval((int)elip2d.getX(), (int) elip2d.getY(), w, h);
+        g.drawOval((int)elip.getX(), (int) elip.getY(), w, h);
     }
 
 
@@ -76,10 +76,10 @@ public class MyEllipse implements Paint {
     }
 
     public Ellipse2D getEllipse() {
-        return elip2d;
+        return elip;
     }
 
     public void setEllipse(Ellipse2D ellipse) {
-        this.elip2d = ellipse;
+        this.elip = ellipse;
     }
 }

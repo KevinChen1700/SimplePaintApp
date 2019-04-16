@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-public class MyRectangle implements Paint {
+public class MyRectangle implements DrawAbleShape {
 
     private Rectangle rect;
 
