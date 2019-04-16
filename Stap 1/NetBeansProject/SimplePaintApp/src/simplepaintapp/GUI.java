@@ -23,7 +23,7 @@ public class GUI extends JFrame {
     public static String action; //holds last pressed button
     public static GUI frame;
     private JPanel contentPane;
-    public static ArrayList<Paint> paint = new ArrayList<Paint>(); //ArrayList of all rectangles and ellipses made
+    public static ArrayList<DrawAbleShape> shapes = new ArrayList<DrawAbleShape>(); //ArrayList of all rectangles and ellipses made
 
     //main function that starts the program
     public static void main(String[] args) {

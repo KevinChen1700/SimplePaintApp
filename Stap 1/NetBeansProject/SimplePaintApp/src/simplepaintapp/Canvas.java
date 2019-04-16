@@ -14,7 +14,7 @@ import java.awt.Graphics2D;
 public class Canvas extends JComponent {
 
     public Point startDrag, endDrag;    //remember coordinates of cursor when mouse is being clicked and dragged
-    public Paint ptemp;                 //placeholder for object when editing a object
+    public DrawAbleShape ptemp;                 //placeholder for object when editing a object
 
     
     
@@ -24,15 +24,15 @@ public class Canvas extends JComponent {
                 startDrag = new Point(e.getX(), e.getY());
                 endDrag = startDrag;
                 if (GUI.action == "select") {
-                    for (int i = GUI.paint.size() - 1; i >= 0; i = i - 1) {
-                        Paint pt = GUI.paint.get(i);
+                    for (int i = GUI.shapes.size() - 1; i >= 0; i = i - 1) {
+                        DrawAbleShape pt = GUI.shapes.get(i);
                         if (pt.contains(startDrag)) {
                             if (ptemp != null) 
                             {
-                                GUI.paint.add(ptemp); //puts previous selection back into the paint arraylist
+                                GUI.shapes.add(ptemp); //puts previous selection back into the paint arraylist
                             }
                             ptemp = pt; 
-                            GUI.paint.remove(pt);
+                            GUI.shapes.remove(pt);
                         }
                     }
 
@@ -46,11 +46,11 @@ public class Canvas extends JComponent {
                 if (GUI.action == "Rectangle") {
                     MyRectangle obj = new MyRectangle();
                     obj.makeObject(startDrag, p);
-                    GUI.paint.add(obj);
+                    GUI.shapes.add(obj);
                 } else if (GUI.action == "Ellipse") {
                     MyEllipse obj = new MyEllipse();
                     obj.makeObject(startDrag, p);
-                    GUI.paint.add(obj);
+                    GUI.shapes.add(obj);
                 } else if (ptemp != null) {
                     if (ptemp.contains(startDrag)) {
                         if (GUI.action == "move") {
@@ -82,7 +82,7 @@ public class Canvas extends JComponent {
         Graphics2D g = (Graphics2D) graphicsAdapter;
         boolean movingPtemp = false;
 
-        for (Paint pt : GUI.paint) {
+        for (DrawAbleShape pt : GUI.shapes) {
             pt.draw(g);
         }
 
