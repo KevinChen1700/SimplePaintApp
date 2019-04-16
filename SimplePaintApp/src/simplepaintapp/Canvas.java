@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package simplepaintapp;
 
 import java.awt.BasicStroke;
@@ -36,11 +31,11 @@ public class Canvas extends JComponent {
                     for (int i = GUI.paint.size() - 1; i >= 0; i = i - 1) {
                         Paint pt = GUI.paint.get(i);
                         if (pt.contains(startDrag)) {
-                            if (ptemp != null) //Als er al een ander object geselecteerd was, maar hier nooit iets mee is gedaan komt hij weer bij paint.
+                            if (ptemp != null) 
                             {
-                                GUI.paint.add(ptemp);
+                                GUI.paint.add(ptemp); //puts previous selection back into the paint arraylist
                             }
-                            ptemp = pt;
+                            ptemp = pt; 
                             GUI.paint.remove(pt);
                         }
                     }
@@ -77,7 +72,7 @@ public class Canvas extends JComponent {
         });
         this.addMouseMotionListener(new MouseMotionAdapter() {
             public void mouseDragged(MouseEvent e) {
-                endDrag = new Point(e.getX(), e.getY());  //get coordinates after releasing mouse drag
+                endDrag = new Point(e.getX(), e.getY());  //get coordinates during releasing mouse drag
                 repaint();
             }
         });

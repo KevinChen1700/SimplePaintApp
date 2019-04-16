@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package simplepaintapp;
 
 import java.awt.BorderLayout;
@@ -25,11 +20,12 @@ import java.awt.event.MouseEvent;
 
 public class GUI extends JFrame {
 
-    public static String action;
+    public static String action; //holds last pressed button
     public static GUI frame;
     private JPanel contentPane;
-    public static ArrayList<Paint> paint = new ArrayList<Paint>();
+    public static ArrayList<Paint> paint = new ArrayList<Paint>(); //ArrayList of all rectangles and ellipses made
 
+    //main function that starts the program
     public static void main(String[] args) {
         frame = new GUI();
         frame.setVisible(true);
@@ -41,13 +37,16 @@ public class GUI extends JFrame {
         setSize(800, 500);
         setMinimumSize(getSize());
 
+        //panel that holds both the buttons and the canvas
         contentPane = new JPanel();
         contentPane.setLayout(new BorderLayout(0, 0));
         setContentPane(contentPane);
 
+        //panel for the buttons
         JPanel panel = new JPanel();
         contentPane.add(panel, BorderLayout.NORTH);
 
+        //buttons 
         JButton btnRect = new JButton("Rectangle");
         btnRect.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
@@ -88,6 +87,7 @@ public class GUI extends JFrame {
         });
         panel.add(btnResize);
 
+        //adds canvas below the buttons
         contentPane.add(new Canvas(), BorderLayout.CENTER);
 
     }

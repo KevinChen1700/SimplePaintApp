@@ -47,6 +47,7 @@ public class MyRectangle implements Paint {
         g.drawRect(this.getRect().x + endDrag.x - startDrag.x, this.getRect().y + endDrag.y - startDrag.y, this.getRect().width, this.getRect().height);
     }
     
+    //draws a resized version of the object but this version can't have a width and/or height of less than 1
     @Override
     public void drawExpand(Graphics2D g, int w, int h ) {
         w = rect.width + w;
@@ -67,6 +68,7 @@ public class MyRectangle implements Paint {
         this.setRect(r);
     }
 
+    //resizes the object but not to less than 1 width and/or 1 height
     @Override
     public void resize(Point startDrag, Point endDrag) {
         int x = endDrag.x - startDrag.x;

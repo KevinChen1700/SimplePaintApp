@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package simplepaintapp;
 
 import java.awt.Color;
@@ -46,6 +41,7 @@ public class MyEllipse implements Paint {
         g.drawOval((int) this.getEllipse().getX() + endDrag.x - startDrag.x, (int) this.getEllipse().getY() + endDrag.y - startDrag.y, (int) this.getEllipse().getWidth(), (int) this.getEllipse().getHeight());
     }
     
+    //draws a resized version of the object but this version can't have a width and/or height of less than 1
     @Override
     public void drawExpand(Graphics2D g, int w, int h ) {
         w = (int) elip2d.getWidth() + w;
@@ -67,6 +63,7 @@ public class MyEllipse implements Paint {
         this.getEllipse().setFrame(getEllipse().getX() + endDrag.x - startDrag.x, this.getEllipse().getY() + endDrag.y - startDrag.y, this.getEllipse().getWidth(), this.getEllipse().getHeight());
     }
 
+    //resizes the object but not to less than 1 width and/or 1 height
     @Override
     public void resize(Point startDrag, Point endDrag) {
         int x = endDrag.x - startDrag.x;
