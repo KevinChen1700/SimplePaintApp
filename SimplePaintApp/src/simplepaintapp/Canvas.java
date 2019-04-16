@@ -22,10 +22,11 @@ import java.awt.Graphics2D;
  */
 public class Canvas extends JComponent {
 
-    public Point startDrag, endDrag;
-    public Paint ptemp;
-    public BasicStroke bstroke;
+    public Point startDrag, endDrag;    //remember coordinates of cursor when mouse is being clicked and dragged
+    public Paint ptemp;                 //placeholder for object when editing a object
 
+    
+    
     public Canvas() {
         this.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
@@ -47,7 +48,8 @@ public class Canvas extends JComponent {
                 }
 
             }
-
+            
+            //after releasing mouse drag, draw the corresponding object
             public void mouseReleased(MouseEvent e) {
                 Point p = new Point(e.getX(), e.getY());
                 if (GUI.action == "Rectangle") {
@@ -75,19 +77,17 @@ public class Canvas extends JComponent {
         });
         this.addMouseMotionListener(new MouseMotionAdapter() {
             public void mouseDragged(MouseEvent e) {
-                endDrag = new Point(e.getX(), e.getY());
+                endDrag = new Point(e.getX(), e.getY());  //get coordinates after releasing mouse drag
                 repaint();
             }
         });
 
     }
 
+    //show animation for when editing the objects
     @Override
     public void paint(Graphics graphicsAdapter) {
-        //GraphicAdapter g2 = new GraphicAdapter() {};
-        //g2.setGraphicAdapter(g);
-        //bstroke = new BasicStroke(40);
-        //g2.getGraphicAdapter().setStroke(bstroke);
+        
         Graphics2D g = (Graphics2D) graphicsAdapter;
         boolean movingPtemp = false;
 
