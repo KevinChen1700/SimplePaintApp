@@ -11,6 +11,10 @@ import javax.swing.JComponent;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+/**
+ *
+ * @author Sjimmie
+ */
 public class Canvas extends JComponent {
 
     public Point startDrag, endDrag;    //remember coordinates of cursor when mouse is being clicked and dragged

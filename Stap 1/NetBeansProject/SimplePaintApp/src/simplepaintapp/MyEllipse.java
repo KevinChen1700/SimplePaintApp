@@ -26,6 +26,11 @@ public class MyEllipse implements Paint {
         this.setEllipse(e);
     }
 
+    public void makeEllipse(int x, int y, int w, int h) {
+        Ellipse2D r = new Ellipse2D.Float(x, y, w, h);
+        this.setEllipse(r);
+    }
+
     @Override
     public void draw(Graphics2D g) {
         g.drawOval((int) getEllipse().getX(), (int) getEllipse().getY(), (int) getEllipse().getWidth(), (int) getEllipse().getHeight());
