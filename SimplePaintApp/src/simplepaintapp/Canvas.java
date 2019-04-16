@@ -18,76 +18,82 @@ import javax.swing.JComponent;
  *
  * @author Sjimmie
  */
-public class Canvas extends JComponent{
+public class Canvas extends JComponent {
+
     public Point startDrag, endDrag;
     public Paint ptemp;
     public BasicStroke bstroke;
-    
-    public Canvas(){
-        this.addMouseListener(new MouseAdapter(){
-            public void mousePressed(MouseEvent e){
+
+    public Canvas() {
+        this.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
                 startDrag = new Point(e.getX(), e.getY());
                 endDrag = startDrag;
-                if(GUI.action =="move"){
-                    for(int i =GUI.paint.size()-1; i>=0;i=i-1)
-                    {
+                if (GUI.action == "move") {
+                    for (int i = GUI.paint.size() - 1; i >= 0; i = i - 1) {
                         Paint pt = GUI.paint.get(i);
-                        if(pt.contains(startDrag))
-                        {
-                            ptemp=pt;
+                        if (pt.contains(startDrag)) {
+                            ptemp = pt;
                             GUI.paint.remove(pt);
                         }
                     }
-                    
-                
+
                 }
-            
+
             }
-            public void mouseReleased(MouseEvent e)
-            {
+
+            public void mouseReleased(MouseEvent e) {
                 Point p = new Point(e.getX(), e.getY());
-                if(GUI.action == "Rectangle"){
-	        		MyRectangle obj = new MyRectangle();
-	        		obj.makeObject(startDrag, p);
-	    			GUI.paint.add(obj);
-	        	}
-                        startDrag = null;
-	        	endDrag = null;
-	        	repaint();
+                if (GUI.action == "Rectangle") {
+                    MyRectangle obj = new MyRectangle();
+                    obj.makeObject(startDrag, p);
+                    GUI.paint.add(obj);
+                } else if (GUI.action == "move") {
+                    if (ptemp.contains(startDrag)) {
+                        ptemp.move(startDrag, p);
+                        GUI.paint.add(ptemp);
+                    }
+                }
+                startDrag = null;
+                endDrag = null;
+                repaint();
             }
-        
-        
+
         });
         this.addMouseMotionListener(new MouseMotionAdapter() {
-	        public void mouseDragged(MouseEvent e) {
-	        	endDrag = new Point(e.getX(), e.getY());
-	        	repaint();
-	        }
-	      });
-    
+            public void mouseDragged(MouseEvent e) {
+                endDrag = new Point(e.getX(), e.getY());
+                repaint();
+            }
+        });
+
     }
-        public void paint(Graphics g) {
-		GraphicAdapter g2 = new GraphicAdapter() {
-		};
-		g2.setGraphicAdapter(g);
-		//bstroke = new BasicStroke(40);
-		//g2.getGraphicAdapter().setStroke(bstroke);
-		
-		for (Paint pt : GUI.paint){
-			pt.draw(g2);
-		}
-		if (startDrag != null && endDrag != null) {
-			if(GUI.action == "Rectangle"){
-				MyRectangle obj = new MyRectangle();
-				obj.makeObject(startDrag, endDrag);
-				obj.draw(g2);
-			
-			
-			}
-		}
+
+    public void paint(Graphics g) {
+        GraphicAdapter g2 = new GraphicAdapter() {
+        };
+        g2.setGraphicAdapter(g);
+        //bstroke = new BasicStroke(40);
+        //g2.getGraphicAdapter().setStroke(bstroke);
+
+        for (Paint pt : GUI.paint) {
+            pt.draw(g2);
         }
+        if (startDrag != null && endDrag != null) {
+            if (GUI.action == "Rectangle") {
+                MyRectangle obj = new MyRectangle();
+                obj.makeObject(startDrag, endDrag);
+                obj.draw(g2);
 
-               
-    
+            } else if (GUI.action == "move") {
+                if (ptemp instanceof MyRectangle) {
+                    MyRectangle r = (MyRectangle) ptemp;
+                    if (r.contains(startDrag)) {
+                        g2.getGraphicAdapter().drawRect(r.getRect().x + endDrag.x - startDrag.x, r.getRect().y + endDrag.y - startDrag.y, r.getRect().width, r.getRect().height);
+                    }
+                }
+            }
+        }
+    }
+
 }
-

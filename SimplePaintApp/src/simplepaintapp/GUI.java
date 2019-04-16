@@ -56,6 +56,14 @@ public class GUI extends JFrame {
 		});
                 panel.add(btnRect);
                 
+                JButton btnSelect = new JButton("Select");
+		btnSelect.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				action = "select";
+			}
+		});
+		panel.add(btnSelect);
+                
 		JButton btnMove = new JButton("Move");
 		btnMove.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -63,6 +71,14 @@ public class GUI extends JFrame {
 			}
 		});
 		panel.add(btnMove);
+                
+                JButton btnResize = new JButton("Resize");
+		btnResize.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				action = "resize";
+			}
+		});
+		panel.add(btnResize);
 		
 		contentPane.add(new Canvas(), BorderLayout.CENTER);
                 
