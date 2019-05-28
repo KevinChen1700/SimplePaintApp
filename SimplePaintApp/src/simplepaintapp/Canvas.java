@@ -15,6 +15,7 @@ public class Canvas extends JComponent {
 
     public static Point startDrag, endDrag, p;    //remember coordinates of cursor when mouse is being clicked and dragged
     public static DrawAbleShape ptemp;                 //placeholder for object when editing a object
+    public static Graphics2D g;                   // used to draw the objects
     Invoker invoker = new Invoker();
         
     public Canvas() {
@@ -84,8 +85,7 @@ public class Canvas extends JComponent {
     @Override
     public void paint(Graphics graphicsAdapter) {
         
-        Graphics2D g = (Graphics2D) graphicsAdapter;
-        boolean movingPtemp = false;
+        g = (Graphics2D) graphicsAdapter;
 
         for (DrawAbleShape pt : GUI.shapes) {
             pt.draw(g);
@@ -94,22 +94,26 @@ public class Canvas extends JComponent {
         if (startDrag != null && endDrag != null && GUI.action != "select") {
             if (GUI.action == "Rectangle") {
                 MyRectangle obj = new MyRectangle();
-                obj.makeObject(startDrag, endDrag);
-                obj.draw(g);
+                drawRect drawRectCommand = new drawRect(obj);
+                invoker.takeAction(drawRectCommand);
+                invoker.placeAction();
             } else if (GUI.action == "Ellipse") {
                 MyEllipse obj = new MyEllipse();
-                obj.makeObject(startDrag, endDrag);
-                obj.draw(g);
+                drawEllip drawEllipCommand = new drawEllip(obj);
+                invoker.takeAction(drawEllipCommand);
+                invoker.placeAction();
             }
             if (ptemp != null) {
                 g.setColor(Color.RED);
                 if (ptemp.contains(startDrag)) {
                     if (GUI.action == "move") {
-                        ptemp.drawPoints(g, startDrag, endDrag);
+                        drawMoveCommand moveCommand = new drawMoveCommand();
+                        invoker.takeAction(moveCommand);
+                        invoker.placeAction();
                     } else if (GUI.action == "resize") {
-                        int w = endDrag.x - startDrag.x;
-                        int h = endDrag.y - startDrag.y;
-                        ptemp.drawExpand(g, w, h);
+                        drawResizeCommand resizeCommand = new drawResizeCommand();
+                        invoker.takeAction(resizeCommand);
+                        invoker.placeAction();
                     }
                 } else {
                     ptemp.draw(g);

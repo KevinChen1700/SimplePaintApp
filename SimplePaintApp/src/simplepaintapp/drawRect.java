@@ -5,18 +5,22 @@
  */
 package simplepaintapp;
 
-import static simplepaintapp.Canvas.p;
-import static simplepaintapp.Canvas.ptemp;
+import static simplepaintapp.Canvas.endDrag;
 import static simplepaintapp.Canvas.startDrag;
-
+import static simplepaintapp.Canvas.g;
 /**
  *
  * @author Kevin
  */
-public class moveCommand implements command {
+public class drawRect implements command {
+    private MyRectangle obj;
+    public drawRect(MyRectangle obj){
+    this.obj = obj;
+    }
     
     public void execute()
     {
-      ptemp.move(startDrag, p);
-   }
+      obj.makeObject(startDrag, endDrag);
+      obj.draw(g);
+    }
 }

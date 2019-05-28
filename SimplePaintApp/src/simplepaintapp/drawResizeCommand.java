@@ -5,7 +5,8 @@
  */
 package simplepaintapp;
 
-import static simplepaintapp.Canvas.p;
+import static simplepaintapp.Canvas.endDrag;
+import static simplepaintapp.Canvas.g;
 import static simplepaintapp.Canvas.ptemp;
 import static simplepaintapp.Canvas.startDrag;
 
@@ -13,10 +14,12 @@ import static simplepaintapp.Canvas.startDrag;
  *
  * @author Kevin
  */
-public class moveCommand implements command {
+public class drawResizeCommand implements command {
     
     public void execute()
     {
-      ptemp.move(startDrag, p);
-   }
+       int w = endDrag.x - startDrag.x;
+       int h = endDrag.y - startDrag.y;
+       ptemp.drawExpand(g, w, h);
+    }
 }
