@@ -18,20 +18,15 @@ public class MyRectangle implements DrawAbleShape {
         this.rect = r;
     }    
 
-    @Override
-    public void makeObject(Point startDrag, Point endDrag) {
-        Rectangle r = new Rectangle(Math.min(startDrag.x, endDrag.x), Math.min(startDrag.y, endDrag.y), Math.abs(startDrag.x - endDrag.x), Math.abs(startDrag.y - endDrag.y));
-        this.setRect(r);
-    }
 
     @Override
     public void draw(Graphics2D g) {
-        g.drawRect(this.getRect().x, this.getRect().y, this.getRect().width, this.getRect().height);
+        g.drawRect(rect.x, rect.y, rect.width, rect.height);
     }
     
     @Override
     public void drawPoints(Graphics2D g, Point startDrag, Point endDrag) {
-        g.drawRect(this.getRect().x + endDrag.x - startDrag.x, this.getRect().y + endDrag.y - startDrag.y, this.getRect().width, this.getRect().height);
+        g.drawRect(rect.x + endDrag.x - startDrag.x, rect.y + endDrag.y - startDrag.y, rect.width, rect.height);
     }
     
     //draws a resized version of the object but this version can't have a width and/or height of less than 1
@@ -43,16 +38,17 @@ public class MyRectangle implements DrawAbleShape {
         if (h < 1) h =1;
         g.drawRect(rect.x, rect.y, w, h);
     }
-
+    
     @Override
-    public boolean contains(Point p) {
-        return this.getRect().contains(p);
+    public void makeObject(Point startDrag, Point endDrag) {
+        Rectangle r = new Rectangle(Math.min(startDrag.x, endDrag.x), Math.min(startDrag.y, endDrag.y), Math.abs(startDrag.x - endDrag.x), Math.abs(startDrag.y - endDrag.y));
+        rect = r;
     }
 
     @Override
     public void move(Point startDrag, Point endDrag) {
-        Rectangle r = new Rectangle(this.getRect().x + (endDrag.x - startDrag.x), this.getRect().y + (endDrag.y - startDrag.y), this.getRect().width, this.getRect().height);
-        this.setRect(r);
+        Rectangle r = new Rectangle(rect.x + (endDrag.x - startDrag.x), rect.y + (endDrag.y - startDrag.y), rect.width, rect.height);
+        rect = r;
     }
 
     //resizes the object but not to less than 1 width and/or 1 height
@@ -60,24 +56,21 @@ public class MyRectangle implements DrawAbleShape {
     public void resize(Point startDrag, Point endDrag) {
         int x = endDrag.x - startDrag.x;
         int y = endDrag.y - startDrag.y;
-        if ((this.getRect().width + x) < 1) {
-            x = (this.getRect().width - 1);
+        if ((rect.width + x) < 1) {
+            x = (rect.width - 1);
             x = -x;
         }
-        if ((this.getRect().height + y) < 1) {
-            y = this.getRect().height - 1;
+        if ((rect.height + y) < 1) {
+            y = rect.height - 1;
             y = -y;
         }
-        Rectangle r= new Rectangle(this.getRect().x, this.getRect().y, this.getRect().width + x, this.getRect().height + y);
-        this.setRect(r);
+        Rectangle r= new Rectangle(rect.x, rect.y, rect.width + x, rect.height + y);
+        rect = r;
     }
-
-    public Rectangle getRect() {
-        return rect;
-    }
-
-    public void setRect(Rectangle rect) {
-        this.rect = rect;
+    
+    @Override
+    public boolean contains(Point p) {
+        return rect.contains(p);
     }
 
 }

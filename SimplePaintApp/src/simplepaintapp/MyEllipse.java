@@ -19,21 +19,15 @@ public class MyEllipse implements DrawAbleShape {
     public MyEllipse(Ellipse2D e) {
         this.elip = e;
     }
-
-    @Override
-    public void makeObject(Point startDrag, Point endDrag) {
-        Ellipse2D e = new Ellipse2D.Float(Math.min(startDrag.x, endDrag.x), Math.min(startDrag.y, endDrag.y), Math.abs(startDrag.x - endDrag.x), Math.abs(startDrag.y - endDrag.y));
-        this.setEllipse(e);
-    }
-
+    
     @Override
     public void draw(Graphics2D g) {
-        g.drawOval((int) getEllipse().getX(), (int) getEllipse().getY(), (int) getEllipse().getWidth(), (int) getEllipse().getHeight());
+        g.drawOval((int) elip.getX(), (int) elip.getY(), (int) elip.getWidth(), (int) elip.getHeight());
     }
     
     @Override
     public void drawPoints(Graphics2D g, Point startDrag, Point endDrag) {
-        g.drawOval((int) this.getEllipse().getX() + endDrag.x - startDrag.x, (int) this.getEllipse().getY() + endDrag.y - startDrag.y, (int) this.getEllipse().getWidth(), (int) this.getEllipse().getHeight());
+        g.drawOval((int) elip.getX() + endDrag.x - startDrag.x, (int) elip.getY() + endDrag.y - startDrag.y, (int) elip.getWidth(), (int) elip.getHeight());
     }
     
     //draws a resized version of the object but this version can't have a width and/or height of less than 1
@@ -47,15 +41,16 @@ public class MyEllipse implements DrawAbleShape {
         g.drawOval((int)elip.getX(), (int) elip.getY(), w, h);
     }
 
-
     @Override
-    public boolean contains(Point p) {
-        return this.getEllipse().contains(p);
+    public void makeObject(Point startDrag, Point endDrag) {
+        Ellipse2D e = new Ellipse2D.Float(Math.min(startDrag.x, endDrag.x), Math.min(startDrag.y, endDrag.y), Math.abs(startDrag.x - endDrag.x), Math.abs(startDrag.y - endDrag.y));
+        elip = e;
     }
+
 
     @Override
     public void move(Point startDrag, Point endDrag) {
-        this.getEllipse().setFrame(getEllipse().getX() + endDrag.x - startDrag.x, this.getEllipse().getY() + endDrag.y - startDrag.y, this.getEllipse().getWidth(), this.getEllipse().getHeight());
+        elip.setFrame(elip.getX() + endDrag.x - startDrag.x, elip.getY() + endDrag.y - startDrag.y, elip.getWidth(), elip.getHeight());
     }
 
     //resizes the object but not to less than 1 width and/or 1 height
@@ -63,23 +58,20 @@ public class MyEllipse implements DrawAbleShape {
     public void resize(Point startDrag, Point endDrag) {
         int x = endDrag.x - startDrag.x;
         int y = endDrag.y - startDrag.y;
-        if ((this.getEllipse().getWidth() + x) < 1) {
-            x = (int) this.getEllipse().getWidth() - 1;
+        if ((elip.getWidth() + x) < 1) {
+            x = (int) elip.getWidth() - 1;
             x = -x;
         }
-        if ((this.getEllipse().getHeight() + y) < 1) {
-            y = (int) this.getEllipse().getHeight() - 1;
+        if ((elip.getHeight() + y) < 1) {
+            y = (int) elip.getHeight() - 1;
             y = -y;
         }
-        Ellipse2D e = new Ellipse2D.Float((int) this.getEllipse().getX(), (int) this.getEllipse().getY(), (int) this.getEllipse().getWidth() + x, (int) this.getEllipse().getHeight() + y);
-        this.setEllipse(e);
+        Ellipse2D e = new Ellipse2D.Float((int) elip.getX(), (int) elip.getY(), (int) elip.getWidth() + x, (int) elip.getHeight() + y);
+        elip = e;
     }
-
-    public Ellipse2D getEllipse() {
-        return elip;
-    }
-
-    public void setEllipse(Ellipse2D ellipse) {
-        this.elip = ellipse;
+  
+    @Override
+    public boolean contains(Point p) {
+        return this.elip.contains(p);
     }
 }
