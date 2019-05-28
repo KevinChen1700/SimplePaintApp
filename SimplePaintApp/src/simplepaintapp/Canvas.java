@@ -15,6 +15,7 @@ public class Canvas extends JComponent {
 
     public static Point startDrag, endDrag, p;    //remember coordinates of cursor when mouse is being clicked and dragged
     public static DrawAbleShape ptemp;                 //placeholder for object when editing a object
+    public static DrawAbleShape pt;               //used to get the objects in the shapes list
     public static Graphics2D g;                   // used to draw the objects
     Invoker invoker = new Invoker();
         
@@ -24,20 +25,10 @@ public class Canvas extends JComponent {
                 startDrag = new Point(e.getX(), e.getY());
                 endDrag = startDrag;
                 if (GUI.action == "select") {
-                    for (int i = GUI.shapes.size() - 1; i >= 0; i = i - 1) {
-                        DrawAbleShape pt = GUI.shapes.get(i);
-                        if (pt.contains(startDrag)) {
-                            if (ptemp != null) 
-                            {
-                                GUI.shapes.add(ptemp); //puts previous selection back into the paint arraylist
-                            }
-                            ptemp = pt; 
-                            GUI.shapes.remove(pt);
-                        }
-                    }
-
+                    selectCommand select = new selectCommand();
+                    invoker.takeAction(select);
+                    invoker.placeAction();
                 }
-
             }
             
             //after releasing mouse drag, draw the corresponding object
@@ -88,7 +79,10 @@ public class Canvas extends JComponent {
         g = (Graphics2D) graphicsAdapter;
 
         for (DrawAbleShape pt : GUI.shapes) {
-            pt.draw(g);
+            this.pt = pt;
+            drawShapesCommand drawShapes = new drawShapesCommand();
+            invoker.takeAction(drawShapes);
+            invoker.placeAction();
         }
 
         if (startDrag != null && endDrag != null && GUI.action != "select") {
