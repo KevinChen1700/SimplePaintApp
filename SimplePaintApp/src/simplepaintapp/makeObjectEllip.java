@@ -5,7 +5,8 @@
  */
 package simplepaintapp;
 import java.awt.Point;
-import simplepaintapp.command;
+import static simplepaintapp.Canvas.p;
+import static simplepaintapp.Canvas.startDrag;
 
 
 /**
@@ -13,16 +14,13 @@ import simplepaintapp.command;
  * @author Kevin
  */
 public class makeObjectEllip implements command {
-    Point startDrag = new Point(Canvas.startDrag);
-    Point endDrag = new Point(Canvas.p);
     private MyEllipse obj;
     public makeObjectEllip(MyEllipse obj){
       this.obj = obj;
    }
 
    public void execute() {
-      obj.makeObject(startDrag,endDrag);
+      obj.makeObject(startDrag,p);
       GUI.shapes.add(obj);
-      //System.out.println("itworks");
    }
 }

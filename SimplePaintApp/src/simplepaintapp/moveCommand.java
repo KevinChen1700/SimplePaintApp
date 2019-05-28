@@ -15,11 +15,8 @@ import simplepaintapp.command;
  */
 public class moveCommand implements command {
     
-
-    
     public void execute()
     {
       ptemp.move(startDrag, p);
    }
-    
 }

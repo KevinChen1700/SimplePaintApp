@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package simplepaintapp;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +25,4 @@ public class Invoker {
       }
       actionList.clear();
    }
-      
-      
 }

@@ -15,8 +15,6 @@ import static simplepaintapp.Canvas.startDrag;
  */
 public class resizeCommand implements command {
     
-    
-    
     public void execute()
     {
         ptemp.resize(startDrag, p);
