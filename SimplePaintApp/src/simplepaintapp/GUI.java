@@ -29,12 +29,6 @@ public class GUI extends JFrame {
     public static void main(String[] args) {
         frame = new GUI();
         frame.setVisible(true);
-        
-        MyRectangle abcRect = new MyRectangle ();
-        makeObjectRect makeObjectRectCommand = new makeObjectRect(abcRect);
-        Invoker invoker = new Invoker();
-        invoker.takeAction(makeObjectRectCommand);
-        invoker.placeAction();
     }
 
     public GUI() {

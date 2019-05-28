@@ -5,7 +5,6 @@
  */
 
 package simplepaintapp;
-
 import java.awt.Point;
 import simplepaintapp.command;
 
@@ -15,16 +14,16 @@ import simplepaintapp.command;
  * @author Kevin
  */
 public class makeObjectRect implements command {
-    private MyRectangle abcRect;
-    public makeObjectRect(MyRectangle abcRect){
-      this.abcRect = abcRect;
+    Point startDrag = new Point(Canvas.startDrag);
+    Point endDrag = new Point(Canvas.p);
+    private MyRectangle obj;
+    public makeObjectRect(MyRectangle obj){
+      this.obj = obj;
    }
 
-   
-    @Override
    public void execute() {
-       Point startDrag = new Point();
-       Point endDrag = new Point();
-      abcRect.makeObject(startDrag,endDrag);
+      obj.makeObject(startDrag,endDrag);
+      GUI.shapes.add(obj);
+      //System.out.println("itworks");
    }
 }

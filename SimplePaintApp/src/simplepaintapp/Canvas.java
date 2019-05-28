@@ -13,11 +13,10 @@ import java.awt.Graphics2D;
 
 public class Canvas extends JComponent {
 
-    public Point startDrag, endDrag;    //remember coordinates of cursor when mouse is being clicked and dragged
+    public static Point startDrag, endDrag, p;    //remember coordinates of cursor when mouse is being clicked and dragged
     public DrawAbleShape ptemp;                 //placeholder for object when editing a object
-
-    
-    
+    Invoker invoker = new Invoker();
+        
     public Canvas() {
         this.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
@@ -42,11 +41,12 @@ public class Canvas extends JComponent {
             
             //after releasing mouse drag, draw the corresponding object
             public void mouseReleased(MouseEvent e) {
-                Point p = new Point(e.getX(), e.getY());
+                 p = new Point (e.getX(), e.getY());
                 if (GUI.action == "Rectangle") {
-                    MyRectangle obj = new MyRectangle();
-                    obj.makeObject(startDrag, p);
-                    GUI.shapes.add(obj);
+                    MyRectangle obj = new MyRectangle ();
+                    makeObjectRect makeObjectRectCommand = new makeObjectRect(obj);
+                    invoker.takeAction(makeObjectRectCommand);
+                    invoker.placeAction();
                 } else if (GUI.action == "Ellipse") {
                     MyEllipse obj = new MyEllipse();
                     obj.makeObject(startDrag, p);
