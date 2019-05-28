@@ -49,8 +49,11 @@ public class Canvas extends JComponent {
                     invoker.placeAction();
                 } else if (GUI.action == "Ellipse") {
                     MyEllipse obj = new MyEllipse();
-                    obj.makeObject(startDrag, p);
-                    GUI.shapes.add(obj);
+                    makeObjectEllip makeObjectEllipCommand = new makeObjectEllip(obj);
+                    invoker.takeAction(makeObjectEllipCommand);
+                    invoker.placeAction();
+                    //obj.makeObject(startDrag, p);
+                    //GUI.shapes.add(obj);
                 } else if (ptemp != null) {
                     if (ptemp.contains(startDrag)) {
                         if (GUI.action == "move") {
