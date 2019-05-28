@@ -14,7 +14,7 @@ import java.awt.Graphics2D;
 public class Canvas extends JComponent {
 
     public static Point startDrag, endDrag, p;    //remember coordinates of cursor when mouse is being clicked and dragged
-    public DrawAbleShape ptemp;                 //placeholder for object when editing a object
+    public static DrawAbleShape ptemp;                 //placeholder for object when editing a object
     Invoker invoker = new Invoker();
         
     public Canvas() {
@@ -52,14 +52,16 @@ public class Canvas extends JComponent {
                     makeObjectEllip makeObjectEllipCommand = new makeObjectEllip(obj);
                     invoker.takeAction(makeObjectEllipCommand);
                     invoker.placeAction();
-                    //obj.makeObject(startDrag, p);
-                    //GUI.shapes.add(obj);
                 } else if (ptemp != null) {
                     if (ptemp.contains(startDrag)) {
                         if (GUI.action == "move") {
-                            ptemp.move(startDrag, p);
+                            moveCommand moveObjectCommand = new moveCommand();
+                            invoker.takeAction(moveObjectCommand);
+                            invoker.placeAction();
                         } else if (GUI.action == "resize") {
-                            ptemp.resize(startDrag, p);
+                            resizeCommand resizeObjectCommand = new resizeCommand();
+                            invoker.takeAction(resizeObjectCommand);
+                            invoker.placeAction();
                         }
                     }
                 }
