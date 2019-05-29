@@ -15,14 +15,26 @@ public class Invoker {
       private List<command> actionList = new ArrayList<command>(); 
       
       public void takeAction(command action){
-      actionList.add(action);		
+      actionList.add(action);	
+      action.execute();
    }
 
-   public void placeAction(){
+   public void placeAction(command action){
    
-      for (command action : actionList) {
+      //for (command action : actionList) {
          action.execute();
-      }
-      actionList.clear();
+      //}
+      //actionList.clear();
+   }
+   
+   public void undo()
+   {
+       //laatste command in actionList hier verwijderen
+   }
+   
+   public void redo()
+   {
+      //laatste command in actionList hier plakken
+
    }
 }

@@ -27,7 +27,7 @@ public class Canvas extends JComponent {
                 if (GUI.action == "select") {
                     selectCommand select = new selectCommand();
                     invoker.takeAction(select);
-                    invoker.placeAction();
+                    //invoker.placeAction();
                 }
             }
             
@@ -38,22 +38,22 @@ public class Canvas extends JComponent {
                     MyRectangle obj = new MyRectangle ();
                     makeObjectRect makeObjectRectCommand = new makeObjectRect(obj);
                     invoker.takeAction(makeObjectRectCommand);
-                    invoker.placeAction();
+                    //invoker.placeAction();
                 } else if (GUI.action == "Ellipse") {
                     MyEllipse obj = new MyEllipse();
                     makeObjectEllip makeObjectEllipCommand = new makeObjectEllip(obj);
                     invoker.takeAction(makeObjectEllipCommand);
-                    invoker.placeAction();
+                    //invoker.placeAction();
                 } else if (ptemp != null) {
                     if (ptemp.contains(startDrag)) {
                         if (GUI.action == "move") {
                             moveCommand moveObjectCommand = new moveCommand();
                             invoker.takeAction(moveObjectCommand);
-                            invoker.placeAction();
+                            //invoker.placeAction();
                         } else if (GUI.action == "resize") {
                             resizeCommand resizeObjectCommand = new resizeCommand();
                             invoker.takeAction(resizeObjectCommand);
-                            invoker.placeAction();
+                           // invoker.placeAction();
                         }
                     }
                 }
@@ -81,33 +81,33 @@ public class Canvas extends JComponent {
         for (DrawAbleShape pt : GUI.shapes) {
             this.pt = pt;
             drawShapesCommand drawShapes = new drawShapesCommand();
-            invoker.takeAction(drawShapes);
-            invoker.placeAction();
+            //invoker.takeAction(drawShapes);
+            invoker.placeAction(drawShapes);
         }
 
         if (startDrag != null && endDrag != null && GUI.action != "select") {
             if (GUI.action == "Rectangle") {
                 MyRectangle obj = new MyRectangle();
                 drawRect drawRectCommand = new drawRect(obj);
-                invoker.takeAction(drawRectCommand);
-                invoker.placeAction();
+                //invoker.takeAction(drawRectCommand);
+                invoker.placeAction(drawRectCommand);
             } else if (GUI.action == "Ellipse") {
                 MyEllipse obj = new MyEllipse();
                 drawEllip drawEllipCommand = new drawEllip(obj);
-                invoker.takeAction(drawEllipCommand);
-                invoker.placeAction();
+                //invoker.takeAction(drawEllipCommand);
+                invoker.placeAction(drawEllipCommand);
             }
             if (ptemp != null) {
                 g.setColor(Color.RED);
                 if (ptemp.contains(startDrag)) {
                     if (GUI.action == "move") {
                         drawMoveCommand moveCommand = new drawMoveCommand();
-                        invoker.takeAction(moveCommand);
-                        invoker.placeAction();
+                        //invoker.takeAction(moveCommand);
+                        invoker.placeAction(moveCommand);
                     } else if (GUI.action == "resize") {
                         drawResizeCommand resizeCommand = new drawResizeCommand();
-                        invoker.takeAction(resizeCommand);
-                        invoker.placeAction();
+                        //invoker.takeAction(resizeCommand);
+                        invoker.placeAction(resizeCommand);
                     }
                 } else {
                     ptemp.draw(g);
