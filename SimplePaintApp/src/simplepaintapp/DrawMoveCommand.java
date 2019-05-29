@@ -5,22 +5,21 @@
  */
 package simplepaintapp;
 
+import java.awt.Color;
 import static simplepaintapp.Canvas.endDrag;
-import static simplepaintapp.Canvas.startDrag;
 import static simplepaintapp.Canvas.g;
+import static simplepaintapp.Canvas.ptemp;
+import static simplepaintapp.Canvas.startDrag;
+
 /**
  *
  * @author Kevin
  */
-public class drawEllip implements command {
-    private MyEllipse obj;
-    public drawEllip(MyEllipse obj){
-    this.obj = obj;
-    }
-    
-    public void execute()
+public class DrawMoveCommand implements Command {
+
+    public void execute ()
     {
-      obj.makeObject(startDrag, endDrag);
-      obj.draw(g);
+        g.setColor(Color.RED);
+        ptemp.drawPoints(g, startDrag, endDrag);
     }
 }

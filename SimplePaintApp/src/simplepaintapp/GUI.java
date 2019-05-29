@@ -23,6 +23,8 @@ public class GUI extends JFrame {
     public static String action; //holds last pressed button
     public static GUI frame;
     private JPanel contentPane;
+    private Canvas canvas;
+    Invoker invoker = new Invoker();
     public static ArrayList<DrawAbleShape> shapes = new ArrayList<DrawAbleShape>(); //ArrayList of all rectangles and ellipses made
 
     //main function that starts the program
@@ -36,6 +38,8 @@ public class GUI extends JFrame {
         setTitle("SimplePaintApp");
         setSize(800, 500);
         setMinimumSize(getSize());
+        
+        canvas = new Canvas(invoker);
 
         //panel that holds both the buttons and the canvas
         contentPane = new JPanel();
@@ -62,6 +66,9 @@ public class GUI extends JFrame {
             }
         });
         panel.add(btnEllipse);
+        
+        JButton btnEmptySpace = new JButton("");
+        panel.add(btnEmptySpace);
 
         JButton btnSelect = new JButton("Select");
         btnSelect.addActionListener(new ActionListener() {
@@ -86,9 +93,30 @@ public class GUI extends JFrame {
             }
         });
         panel.add(btnResize);
+        
+        JButton btnEmptySpace2 = new JButton("");
+        panel.add(btnEmptySpace2);
+        
+        JButton btnUndo = new JButton("Undo");
+        btnUndo.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                invoker.undo();
+                canvas.repaint();
+            }
+        });
+        panel.add(btnUndo);
+        
+        JButton btnRedo = new JButton("Redo");
+        btnRedo.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                invoker.redo();
+                canvas.repaint();
+            }
+        });
+        panel.add(btnRedo);
 
         //adds canvas below the buttons
-        contentPane.add(new Canvas(), BorderLayout.CENTER);
+        contentPane.add(canvas, BorderLayout.CENTER);
 
     }
 

@@ -4,23 +4,25 @@
  * and open the template in the editor.
  */
 package simplepaintapp;
-
 import java.awt.Point;
-import static simplepaintapp.Canvas.p;
-import static simplepaintapp.Canvas.startDrag;
 
 /**
  *
  * @author Kevin
  */
-public class makeObjectEllip implements command {
+public class MakeObjectEllip extends ObjectCommand {
     private MyEllipse obj;
-    public makeObjectEllip(MyEllipse obj){
+    public MakeObjectEllip(MyEllipse obj, Point startDrag, Point endDrag ){
       this.obj = obj;
+      obj.makeObject(startDrag, endDrag);
    }
-
-   public void execute() {
-      obj.makeObject(startDrag,p);
+    
+    public void execute() {
       GUI.shapes.add(obj);
    }
+   
+    public void undo(){ GUI.shapes.remove(obj);}
+    
+    public void redo(){ GUI.shapes.add(obj);}
+
 }

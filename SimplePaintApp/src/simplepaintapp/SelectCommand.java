@@ -13,7 +13,7 @@ import static simplepaintapp.Canvas.startDrag;
  *
  * @author Kevin
  */
-public class selectCommand implements command {
+public class SelectCommand implements Command {
     
     public void execute ()
     {

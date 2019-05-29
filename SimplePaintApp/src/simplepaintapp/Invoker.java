@@ -4,25 +4,34 @@
  * and open the template in the editor.
  */
 package simplepaintapp;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Stack;
 
 /**
  *
  * @author Kevin
  */
 public class Invoker {
-      private List<command> actionList = new ArrayList<command>(); 
-      
-      public void takeAction(command action){
-      actionList.add(action);		
-   }
+   private Stack<Command> undoStack = new Stack(); 
+   private Stack<Command> redoStack = new Stack(); 
 
-   public void placeAction(){
-   
-      for (command action : actionList) {
+   public void execute(Command action){
          action.execute();
-      }
-      actionList.clear();
+         if(action instanceof ObjectCommand ){undoStack.push(action);}
+   }
+   
+   public void undo(){
+       if(!(undoStack.isEmpty())){
+           Command command = undoStack.pop();
+           ((ObjectCommand) command).undo();
+           redoStack.push(command);
+       }
+   }
+   
+   public void redo(){
+       if(!redoStack.isEmpty()){
+           Command command = redoStack.pop();
+           ((ObjectCommand) command).redo();
+           undoStack.push(command);
+       }
    }
 }

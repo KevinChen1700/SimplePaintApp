@@ -9,6 +9,6 @@ package simplepaintapp;
  *
  * @author Kevin
  */
-public interface command {
+public interface Command {
     void execute();
 }

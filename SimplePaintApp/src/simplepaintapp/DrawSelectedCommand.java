@@ -5,18 +5,20 @@
  */
 package simplepaintapp;
 
-import static simplepaintapp.Canvas.p;
+import java.awt.Color;
+import static simplepaintapp.Canvas.g;
 import static simplepaintapp.Canvas.ptemp;
-import static simplepaintapp.Canvas.startDrag;
+
 
 /**
  *
  * @author Kevin
  */
-public class resizeCommand implements command {
+public class DrawSelectedCommand implements Command {
     
     public void execute()
     {
-        ptemp.resize(startDrag, p);
+      g.setColor(Color.RED);
+      ptemp.draw(g);
     }
 }

@@ -1,59 +1,53 @@
 package simplepaintapp;
 
-import java.awt.BasicStroke;
-import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.awt.Color;
 import javax.swing.JComponent;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 
 public class Canvas extends JComponent {
 
-    public static Point startDrag, endDrag, p;    //remember coordinates of cursor when mouse is being clicked and dragged
+    protected static Point startDrag, endDrag;    //remember coordinates of cursor when mouse is being clicked and dragged
+    
     public static DrawAbleShape ptemp;                 //placeholder for object when editing a object
     public static DrawAbleShape pt;               //used to get the objects in the shapes list
     public static Graphics2D g;                   // used to draw the objects
-    Invoker invoker = new Invoker();
+    Invoker invoker;
         
-    public Canvas() {
+    public Canvas(Invoker invoker) {
+        this.invoker = invoker;
         this.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 startDrag = new Point(e.getX(), e.getY());
                 endDrag = startDrag;
                 if (GUI.action == "select") {
-                    selectCommand select = new selectCommand();
-                    invoker.takeAction(select);
-                    invoker.placeAction();
+                    SelectCommand select = new SelectCommand();
+                    invoker.execute(select);
                 }
             }
             
             //after releasing mouse drag, draw the corresponding object
             public void mouseReleased(MouseEvent e) {
-                 p = new Point (e.getX(), e.getY());
                 if (GUI.action == "Rectangle") {
                     MyRectangle obj = new MyRectangle ();
-                    makeObjectRect makeObjectRectCommand = new makeObjectRect(obj);
-                    invoker.takeAction(makeObjectRectCommand);
-                    invoker.placeAction();
+                    MakeObjectRect makeObjectRectCommand = new MakeObjectRect(obj, startDrag, endDrag);
+                    invoker.execute(makeObjectRectCommand);
                 } else if (GUI.action == "Ellipse") {
                     MyEllipse obj = new MyEllipse();
-                    makeObjectEllip makeObjectEllipCommand = new makeObjectEllip(obj);
-                    invoker.takeAction(makeObjectEllipCommand);
-                    invoker.placeAction();
+                    MakeObjectEllip makeObjectEllipCommand = new MakeObjectEllip(obj, startDrag, endDrag);
+                    invoker.execute(makeObjectEllipCommand);
                 } else if (ptemp != null) {
                     if (ptemp.contains(startDrag)) {
                         if (GUI.action == "move") {
-                            moveCommand moveObjectCommand = new moveCommand();
-                            invoker.takeAction(moveObjectCommand);
-                            invoker.placeAction();
+                            MoveObjectCommand moveObjectCommand = new MoveObjectCommand(startDrag, endDrag, ptemp);
+                            invoker.execute(moveObjectCommand);
                         } else if (GUI.action == "resize") {
-                            resizeCommand resizeObjectCommand = new resizeCommand();
-                            invoker.takeAction(resizeObjectCommand);
-                            invoker.placeAction();
+                            ResizeObjectCommand resizeObjectCommand = new ResizeObjectCommand(startDrag, endDrag, ptemp);
+                            invoker.execute(resizeObjectCommand);
                         }
                     }
                 }
@@ -80,42 +74,37 @@ public class Canvas extends JComponent {
 
         for (DrawAbleShape pt : GUI.shapes) {
             this.pt = pt;
-            drawShapesCommand drawShapes = new drawShapesCommand();
-            invoker.takeAction(drawShapes);
-            invoker.placeAction();
+            DrawShapesCommand drawShapes = new DrawShapesCommand();
+            invoker.execute(drawShapes);
         }
 
         if (startDrag != null && endDrag != null && GUI.action != "select") {
             if (GUI.action == "Rectangle") {
                 MyRectangle obj = new MyRectangle();
-                drawRect drawRectCommand = new drawRect(obj);
-                invoker.takeAction(drawRectCommand);
-                invoker.placeAction();
+                DrawRect drawRectCommand = new DrawRect(obj);
+                invoker.execute(drawRectCommand);
             } else if (GUI.action == "Ellipse") {
                 MyEllipse obj = new MyEllipse();
-                drawEllip drawEllipCommand = new drawEllip(obj);
-                invoker.takeAction(drawEllipCommand);
-                invoker.placeAction();
+                DrawEllip drawEllipCommand = new DrawEllip(obj);
+                invoker.execute(drawEllipCommand);
             }
             if (ptemp != null) {
-                g.setColor(Color.RED);
                 if (ptemp.contains(startDrag)) {
                     if (GUI.action == "move") {
-                        drawMoveCommand moveCommand = new drawMoveCommand();
-                        invoker.takeAction(moveCommand);
-                        invoker.placeAction();
+                        DrawMoveCommand moveCommand = new DrawMoveCommand();
+                        invoker.execute(moveCommand);
                     } else if (GUI.action == "resize") {
-                        drawResizeCommand resizeCommand = new drawResizeCommand();
-                        invoker.takeAction(resizeCommand);
-                        invoker.placeAction();
+                        DrawResizeCommand resizeCommand = new DrawResizeCommand();
+                        invoker.execute(resizeCommand);
                     }
                 } else {
-                    ptemp.draw(g);
+                    DrawSelectedCommand selectCommand = new DrawSelectedCommand();
+                    invoker.execute(selectCommand);
                 }
             }
         } else if (ptemp != null) {
-            g.setColor(Color.RED);
-            ptemp.draw(g);
+            DrawSelectedCommand selectCommand = new DrawSelectedCommand();
+            invoker.execute(selectCommand);
         }
     }
 }

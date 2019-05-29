@@ -5,18 +5,16 @@
  */
 package simplepaintapp;
 
-import static simplepaintapp.Canvas.pt;
-import static simplepaintapp.Canvas.g;
-
-
 /**
  *
- * @author Kevin
+ * @author Sjimmie
  */
-public class drawShapesCommand implements command {
+public abstract class ObjectCommand implements Command {
+    private DrawAbleShape obj;
+    @Override
+    public void execute() {}
+
+    public abstract void undo();
     
-    public void execute()
-    {
-      pt.draw(g);
-    }
+    public abstract void redo();
 }

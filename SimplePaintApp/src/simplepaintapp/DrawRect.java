@@ -6,20 +6,21 @@
 package simplepaintapp;
 
 import static simplepaintapp.Canvas.endDrag;
-import static simplepaintapp.Canvas.g;
-import static simplepaintapp.Canvas.ptemp;
 import static simplepaintapp.Canvas.startDrag;
-
+import static simplepaintapp.Canvas.g;
 /**
  *
  * @author Kevin
  */
-public class drawResizeCommand implements command {
+public class DrawRect implements Command {
+    private MyRectangle obj;
+    public DrawRect(MyRectangle obj){
+    this.obj = obj;
+    }
     
     public void execute()
     {
-       int w = endDrag.x - startDrag.x;
-       int h = endDrag.y - startDrag.y;
-       ptemp.drawExpand(g, w, h);
+      obj.makeObject(startDrag, endDrag);
+      obj.draw(g);
     }
 }

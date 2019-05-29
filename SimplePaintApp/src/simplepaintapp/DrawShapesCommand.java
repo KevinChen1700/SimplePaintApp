@@ -5,19 +5,18 @@
  */
 package simplepaintapp;
 
-import static simplepaintapp.Canvas.endDrag;
+import static simplepaintapp.Canvas.pt;
 import static simplepaintapp.Canvas.g;
-import static simplepaintapp.Canvas.ptemp;
-import static simplepaintapp.Canvas.startDrag;
+
 
 /**
  *
  * @author Kevin
  */
-public class drawMoveCommand implements command {
-
-    public void execute ()
+public class DrawShapesCommand implements Command {
+    
+    public void execute()
     {
-        ptemp.drawPoints(g, startDrag, endDrag);
+      pt.draw(g);
     }
 }
