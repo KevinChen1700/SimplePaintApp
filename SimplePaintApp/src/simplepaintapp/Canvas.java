@@ -11,8 +11,9 @@ import java.util.ArrayList;
 
 public class Canvas extends JComponent {
 
+    private String action ="";
+    private ArrayList<DrawAbleShape> shapes = new ArrayList<DrawAbleShape>(); //ArrayList of all rectangles and ellipses made
     protected static Point startDrag, endDrag;    //remember coordinates of cursor when mouse is being clicked and dragged
-    
     public static DrawAbleShape ptemp;                 //placeholder for object when editing a object
     public static DrawAbleShape pt;               //used to get the objects in the shapes list
     public static Graphics2D g;                   // used to draw the objects
@@ -21,33 +22,32 @@ public class Canvas extends JComponent {
         
     public Canvas(Invoker invoker) {
         this.invoker = invoker;
-        
         this.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 startDrag = new Point(e.getX(), e.getY());
                 endDrag = startDrag;
-                if (GUI.action == "select") {
-                    SelectCommand select = new SelectCommand();
+                if (action == "select") {
+                    SelectCommand select = new SelectCommand(shapes);
                     invoker.execute(select);
                 }
             }
             
             //after releasing mouse drag, draw the corresponding object
             public void mouseReleased(MouseEvent e) {
-                if (GUI.action == "Rectangle") {
+                if (action == "Rectangle") {
                     MyRectangle obj = new MyRectangle ();
-                    MakeObjectRect makeObjectRectCommand = new MakeObjectRect(obj, startDrag, endDrag);
+                    MakeObjectRect makeObjectRectCommand = new MakeObjectRect(shapes, obj, startDrag, endDrag);
                     invoker.execute(makeObjectRectCommand);
-                } else if (GUI.action == "Ellipse") {
+                } else if (action == "Ellipse") {
                     MyEllipse obj = new MyEllipse();
-                    MakeObjectEllip makeObjectEllipCommand = new MakeObjectEllip(obj, startDrag, endDrag);
+                    MakeObjectEllip makeObjectEllipCommand = new MakeObjectEllip(shapes, obj, startDrag, endDrag);
                     invoker.execute(makeObjectEllipCommand);
                 } else if (ptemp != null) {
                     if (ptemp.contains(startDrag)) {
-                        if (GUI.action == "move") {
+                        if (action == "move") {
                             Move moveObject = new Move (startDrag,endDrag,ptemp);
                             visitor.visitMove(moveObject);
-                        } else if (GUI.action == "resize") {
+                        } else if (action == "resize") {
                             Resize resizeObject = new Resize (startDrag,endDrag,ptemp);
                             visitor.visitResize(resizeObject);
                         }
@@ -68,33 +68,41 @@ public class Canvas extends JComponent {
 
     }
 
+        public void setAction(String action){
+        this.action=action;
+    }
+    
+    public ArrayList<DrawAbleShape> getShapes(){
+        return shapes;
+    }
+    
     //show animation for when editing the objects
     @Override
     public void paint(Graphics graphicsAdapter) {
         
         g = (Graphics2D) graphicsAdapter;
 
-        for (DrawAbleShape pt : GUI.shapes) {
+        for (DrawAbleShape pt : shapes) {
             this.pt = pt;
             DrawShapesCommand drawShapes = new DrawShapesCommand();
             invoker.execute(drawShapes);
         }
 
-        if (startDrag != null && endDrag != null && GUI.action != "select") {
-            if (GUI.action == "Rectangle") {
+        if (startDrag != null && endDrag != null && action != "select") {
+            if (action == "Rectangle") {
                 MyRectangle obj = new MyRectangle();
                 DrawRect drawRectCommand = new DrawRect(obj);
                 invoker.execute(drawRectCommand);
-            } else if (GUI.action == "Ellipse") {
+            } else if (action == "Ellipse") {
                 MyEllipse obj = new MyEllipse();
                 DrawEllip drawEllipCommand = new DrawEllip(obj);
                 invoker.execute(drawEllipCommand);
             }
             if (ptemp != null) {
                 if (ptemp.contains(startDrag)) {
-                    if (GUI.action == "move") {
+                    if (action == "move") {
                         visitor.drawMove();
-                    } else if (GUI.action == "resize") {
+                    } else if (action == "resize") {
                         visitor.drawResize();
                     }
                 } else {

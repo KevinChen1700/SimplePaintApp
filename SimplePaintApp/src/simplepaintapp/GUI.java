@@ -20,12 +20,10 @@ import java.awt.event.MouseEvent;
 
 public class GUI extends JFrame {
 
-    public static String action; //holds last pressed button
-    public static GUI frame;
+    private static GUI frame;
     private JPanel contentPane;
     private Canvas canvas;
     Invoker invoker = new Invoker();
-    public static ArrayList<DrawAbleShape> shapes = new ArrayList<DrawAbleShape>(); //ArrayList of all rectangles and ellipses made
 
     //main function that starts the program
     public static void main(String[] args) {
@@ -36,7 +34,7 @@ public class GUI extends JFrame {
     public GUI() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("SimplePaintApp");
-        setSize(800, 500);
+        setSize(1200, 500);
         setMinimumSize(getSize());
         
         canvas = new Canvas(invoker);
@@ -54,7 +52,7 @@ public class GUI extends JFrame {
         JButton btnRect = new JButton("Rectangle");
         btnRect.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                action = "Rectangle";
+                canvas.setAction("Rectangle");
             }
         });
         panel.add(btnRect);
@@ -62,7 +60,7 @@ public class GUI extends JFrame {
         JButton btnEllipse = new JButton("Ellipse");
         btnEllipse.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                action = "Ellipse";
+                canvas.setAction("Ellipse");
             }
         });
         panel.add(btnEllipse);
@@ -73,7 +71,7 @@ public class GUI extends JFrame {
         JButton btnSelect = new JButton("Select");
         btnSelect.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                action = "select";
+                canvas.setAction("select");
             }
         });
         panel.add(btnSelect);
@@ -81,7 +79,7 @@ public class GUI extends JFrame {
         JButton btnMove = new JButton("Move");
         btnMove.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                action = "move";
+                canvas.setAction("move");
             }
         });
         panel.add(btnMove);
@@ -89,7 +87,7 @@ public class GUI extends JFrame {
         JButton btnResize = new JButton("Resize");
         btnResize.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                action = "resize";
+                canvas.setAction("resize");
             }
         });
         panel.add(btnResize);
@@ -114,6 +112,27 @@ public class GUI extends JFrame {
             }
         });
         panel.add(btnRedo);
+        
+        JButton btnEmptySpace3 = new JButton("");
+        panel.add(btnEmptySpace3);
+        
+        JButton btnSave = new JButton("Save");
+        btnSave.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                SaveCommand savecommand = new SaveCommand(canvas.getShapes());
+                invoker.execute(savecommand);
+            }
+        });
+        panel.add(btnSave);
+        
+        JButton btnLoad = new JButton("Load");
+        btnLoad.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                LoadCommand loadcommand = new LoadCommand(canvas);
+                invoker.execute(loadcommand);
+            }
+        });
+        panel.add(btnLoad);
 
         //adds canvas below the buttons
         contentPane.add(canvas, BorderLayout.CENTER);

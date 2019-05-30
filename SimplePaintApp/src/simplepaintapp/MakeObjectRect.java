@@ -5,6 +5,7 @@
  */
 package simplepaintapp;
 import java.awt.Point;
+import java.util.ArrayList;
 import javax.swing.JComponent;
 
 /**
@@ -13,19 +14,21 @@ import javax.swing.JComponent;
  */
 public class MakeObjectRect extends ObjectCommand {
     private MyRectangle obj;
-    public MakeObjectRect(MyRectangle obj, Point startDrag, Point endDrag){
+    ArrayList<DrawAbleShape> shapes;
+    public MakeObjectRect(ArrayList<DrawAbleShape> shapes, MyRectangle obj, Point startDrag, Point endDrag){
+      this.shapes = shapes;
       this.obj = obj;
       obj.makeObject(startDrag, endDrag);
    }
     
     public void execute() {
-      GUI.shapes.add(obj);
+      shapes.add(obj);
    }
    
     @Override
-    public void undo(){ GUI.shapes.remove(obj);}
+    public void undo(){ shapes.remove(obj);}
     
     @Override
-    public void redo(){ GUI.shapes.add(obj);}
+    public void redo(){ shapes.add(obj);}
 
 }
