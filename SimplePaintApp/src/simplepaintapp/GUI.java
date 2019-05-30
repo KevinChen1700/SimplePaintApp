@@ -24,6 +24,7 @@ public class GUI extends JFrame {
     private JPanel contentPane;
     private Canvas canvas;
     Invoker invoker = new Invoker();
+    VisitorOperations visitor = new VisitorOperations();
 
     //main function that starts the program
     public static void main(String[] args) {
@@ -119,8 +120,9 @@ public class GUI extends JFrame {
         JButton btnSave = new JButton("Save");
         btnSave.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                SaveCommand savecommand = new SaveCommand(canvas.getShapes());
-                invoker.execute(savecommand);
+                VisitorSave saveFile = new VisitorSave(canvas.getShapes());
+                visitor.visitSave(saveFile);
+                
             }
         });
         panel.add(btnSave);

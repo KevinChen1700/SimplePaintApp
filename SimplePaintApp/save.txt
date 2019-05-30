@@ -1,1 +1,2 @@
-Rectangle 204 92 287 81
+Rectangle 251 43 295 130
+Rectangle 694 88 221 117
