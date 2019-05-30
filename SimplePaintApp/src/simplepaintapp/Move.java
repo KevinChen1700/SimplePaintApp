@@ -11,7 +11,7 @@ import java.awt.Point;
  *
  * @author Kevin
  */
-public class Move implements Visitable {
+public class Move extends ObjectCommand implements Visitable {
     //code to get the values for move function
     private Point startDrag;
     private Point endDrag;
@@ -38,4 +38,7 @@ public class Move implements Visitable {
     public DrawAbleShape getObject(){
         return object;
     }
+    
+    public void undo(){ object.move(endDrag, startDrag);}
+    public void redo(){ object.move(startDrag, endDrag);}
 }

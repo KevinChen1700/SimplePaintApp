@@ -21,6 +21,6 @@ public class VisitorOperations  implements Visitor {
     public void visitResize (Resize object){
     //implement function to do move using the values in Resize
     //object.resize(startDrag, endDrag);
-     object.getObject().move(object.getStartDrag(), object.getEndDrag());
+     object.getObject().resize(object.getStartDrag(), object.getEndDrag());
     }
 }

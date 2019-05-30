@@ -10,7 +10,7 @@ package simplepaintapp;
  * @author Sjimmie
  */
 public abstract class ObjectCommand implements Command {
-    private DrawAbleShape obj;
+    //private DrawAbleShape obj;
     @Override
     public void execute() {}
 
