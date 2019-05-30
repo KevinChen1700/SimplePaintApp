@@ -13,5 +13,5 @@ public interface DrawAbleShape {
 	public boolean contains(Point p); //checks if a certain point is within the object
 	public void move(Point startDrag, Point endDrag); 
         public void resize(Point startDrag, Point endDrag);
-	public void makeObject(Point startDrag, Point endDrag);
+	public void makeObject(Point startDrag, Point endDrag);     
 }

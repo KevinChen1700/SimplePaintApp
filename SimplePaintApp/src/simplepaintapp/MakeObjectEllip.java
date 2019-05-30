@@ -5,6 +5,7 @@
  */
 package simplepaintapp;
 import java.awt.Point;
+import java.util.ArrayList;
 
 /**
  *
@@ -12,17 +13,19 @@ import java.awt.Point;
  */
 public class MakeObjectEllip extends ObjectCommand {
     private MyEllipse obj;
-    public MakeObjectEllip(MyEllipse obj, Point startDrag, Point endDrag ){
+    ArrayList<DrawAbleShape> shapes;
+    public MakeObjectEllip(ArrayList<DrawAbleShape> shapes, MyEllipse obj, Point startDrag, Point endDrag ){
+      this.shapes = shapes;
       this.obj = obj;
       obj.makeObject(startDrag, endDrag);
    }
     
     public void execute() {
-      GUI.shapes.add(obj);
+      shapes.add(obj);
    }
    
-    public void undo(){ GUI.shapes.remove(obj);}
+    public void undo(){ shapes.remove(obj);}
     
-    public void redo(){ GUI.shapes.add(obj);}
+    public void redo(){ shapes.add(obj);}
 
 }

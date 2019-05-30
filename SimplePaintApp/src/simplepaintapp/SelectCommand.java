@@ -5,6 +5,7 @@
  */
 package simplepaintapp;
 
+import java.util.ArrayList;
 import static simplepaintapp.Canvas.pt;
 import static simplepaintapp.Canvas.ptemp;
 import static simplepaintapp.Canvas.startDrag;
@@ -14,18 +15,23 @@ import static simplepaintapp.Canvas.startDrag;
  * @author Kevin
  */
 public class SelectCommand implements Command {
+    private ArrayList<DrawAbleShape> shapes;
+    public SelectCommand(ArrayList<DrawAbleShape> shapes){
+        this.shapes = shapes;
+    }
+    
     
     public void execute ()
     {
-     for (int i = GUI.shapes.size() - 1; i >= 0; i = i - 1) {
-          pt = GUI.shapes.get(i);
+     for (int i = shapes.size() - 1; i >= 0; i = i - 1) {
+          pt = shapes.get(i);
            if (pt.contains(startDrag)) {
                if (ptemp != null) 
                {
-                   GUI.shapes.add(ptemp); //puts previous selection back into the paint arraylist
+                   shapes.add(ptemp); //puts previous selection back into the paint arraylist
                }
                ptemp = pt; 
-               GUI.shapes.remove(pt);
+               shapes.remove(pt);
            }
        }
     }

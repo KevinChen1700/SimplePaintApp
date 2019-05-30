@@ -5,8 +5,17 @@
         <group>
             <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/MyRectangle.java</file>
             <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/MyEllipse.java</file>
+            <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/ObjectCommand.java</file>
+            <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/MakeObjectRect.java</file>
             <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/Canvas.java</file>
             <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/DrawAbleShape.java</file>
+            <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/Command.java</file>
+            <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/MakeObjectEllip.java</file>
+            <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/LoadCommand.java</file>
+            <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/MoveObjectCommand.java</file>
+            <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/SelectCommand.java</file>
+            <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/SaveCommand.java</file>
+            <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/DrawEllip.java</file>
             <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/GUI.java</file>
         </group>
     </open-files>
