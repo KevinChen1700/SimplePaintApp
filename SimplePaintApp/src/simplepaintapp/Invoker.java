@@ -11,8 +11,8 @@ import java.util.Stack;
  * @author Kevin
  */
 public class Invoker {
-   private Stack<Command> undoStack = new Stack(); 
-   private Stack<Command> redoStack = new Stack(); 
+   public static Stack<Command> undoStack = new Stack(); 
+   public static Stack<Command> redoStack = new Stack(); 
 
    public void execute(Command action){
          action.execute();

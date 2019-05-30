@@ -5,6 +5,8 @@
  */
 package simplepaintapp;
 
+import static simplepaintapp.Invoker.undoStack;
+
 /**
  *
  * @author Kevin
@@ -13,14 +15,12 @@ public class VisitorOperations  implements Visitor {
     
     
     public void visitMove(Move object) {
-    //implement function to do move using the values in Move
-     //object.move(startDrag, endDrag);
      object.getObject().move(object.getStartDrag(), object.getEndDrag());
+     if(object instanceof ObjectCommand ){undoStack.push(object);}
     }
     
     public void visitResize (Resize object){
-    //implement function to do move using the values in Resize
-    //object.resize(startDrag, endDrag);
      object.getObject().resize(object.getStartDrag(), object.getEndDrag());
+     if(object instanceof ObjectCommand ){undoStack.push(object);}
     }
 }
