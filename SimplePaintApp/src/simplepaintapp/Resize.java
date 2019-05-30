@@ -9,7 +9,11 @@ package simplepaintapp;
  *
  * @author Kevin
  */
-public interface Visitor {
-    public void visit(Move move);
-    public void visit(Resize resize);
+public class Resize {
+        //code to get the values for move function
+    
+    //accept the visitor
+    public void accept(Visitor visitor) {
+    visitor.visit(this);
+    }
 }

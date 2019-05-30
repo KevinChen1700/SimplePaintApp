@@ -9,11 +9,15 @@ package simplepaintapp;
  *
  * @author Kevin
  */
-public class VisitorMove implements Visitor {
+public class VisitorOperations implements Visitor {
     
     public void visit(Move move) {
     //implement function to do move using the values in Move
+    
     }
     
-    //public void visit (Resize resize){}
+    public void visit (Resize resize){
+    //implement function to do move using the values in Resize
+
+    }
 }
