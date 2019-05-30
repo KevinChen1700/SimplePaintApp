@@ -5,15 +5,37 @@
  */
 package simplepaintapp;
 
+import java.awt.Point;
+
 /**
  *
  * @author Kevin
  */
 public class Move implements Visitable {
     //code to get the values for move function
+    private Point startDrag;
+    private Point endDrag;
+    private DrawAbleShape object;
     
+     public Move(Point startDrag, Point endDrag, DrawAbleShape object)
+    {
+         this.startDrag = startDrag;
+         this.endDrag = endDrag;
+         this.object = object;
+    }
+     
     //accept the visitor
     public void accept(Visitor visitor) {
-    visitor.visit(this);
+    visitor.visitMove(this);
   }
+    
+    public Point getStartDrag(){
+        return startDrag;
+    }
+    public Point getEndDrag(){
+        return endDrag;
+    }
+    public DrawAbleShape getObject(){
+        return object;
+    }
 }

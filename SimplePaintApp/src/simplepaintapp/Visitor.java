@@ -10,6 +10,6 @@ package simplepaintapp;
  * @author Kevin
  */
 public interface Visitor {
-    public void visit(Move move);
-    public void visit(Resize resize);
+    public void visitMove(Move move);
+    public void visitResize(Resize resize);
 }

@@ -9,15 +9,18 @@ package simplepaintapp;
  *
  * @author Kevin
  */
-public class VisitorOperations implements Visitor {
+public class VisitorOperations  implements Visitor {
     
-    public void visit(Move move) {
+    
+    public void visitMove(Move object) {
     //implement function to do move using the values in Move
-    
+     //object.move(startDrag, endDrag);
+     object.getObject().move(object.getStartDrag(), object.getEndDrag());
     }
     
-    public void visit (Resize resize){
+    public void visitResize (Resize object){
     //implement function to do move using the values in Resize
-
+    //object.resize(startDrag, endDrag);
+     object.getObject().move(object.getStartDrag(), object.getEndDrag());
     }
 }
