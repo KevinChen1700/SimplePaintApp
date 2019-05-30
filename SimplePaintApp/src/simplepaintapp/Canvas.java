@@ -16,14 +16,12 @@ public class Canvas extends JComponent {
     public static DrawAbleShape ptemp;                 //placeholder for object when editing a object
     public static DrawAbleShape pt;               //used to get the objects in the shapes list
     public static Graphics2D g;                   // used to draw the objects
-    //private ArrayList<Visitable> items;
     Invoker invoker;
+    VisitorOperations visitor = new VisitorOperations();
         
     public Canvas(Invoker invoker) {
         this.invoker = invoker;
         
-      VisitorOperations visitor = new VisitorOperations();
-
         this.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 startDrag = new Point(e.getX(), e.getY());
@@ -47,13 +45,9 @@ public class Canvas extends JComponent {
                 } else if (ptemp != null) {
                     if (ptemp.contains(startDrag)) {
                         if (GUI.action == "move") {
-                            //MoveObjectCommand moveObjectCommand = new MoveObjectCommand(startDrag, endDrag, ptemp);
-                            //invoker.execute(moveObjectCommand);
                             Move moveObject = new Move (startDrag,endDrag,ptemp);
                             visitor.visitMove(moveObject);
                         } else if (GUI.action == "resize") {
-                            //ResizeObjectCommand resizeObjectCommand = new ResizeObjectCommand(startDrag, endDrag, ptemp);
-                            //invoker.execute(resizeObjectCommand);
                             Resize resizeObject = new Resize (startDrag,endDrag,ptemp);
                             visitor.visitResize(resizeObject);
                         }
@@ -99,11 +93,9 @@ public class Canvas extends JComponent {
             if (ptemp != null) {
                 if (ptemp.contains(startDrag)) {
                     if (GUI.action == "move") {
-                        DrawMoveCommand moveCommand = new DrawMoveCommand();
-                        invoker.execute(moveCommand);
+                        visitor.drawMove();
                     } else if (GUI.action == "resize") {
-                        DrawResizeCommand resizeCommand = new DrawResizeCommand();
-                        invoker.execute(resizeCommand);
+                        visitor.drawResize();
                     }
                 } else {
                     DrawSelectedCommand selectCommand = new DrawSelectedCommand();
