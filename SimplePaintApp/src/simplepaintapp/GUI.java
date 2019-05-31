@@ -133,6 +133,17 @@ public class GUI extends JFrame {
             }
         });
         panel.add(btnLoad);
+        
+        JButton btnEmptySpace4 = new JButton("");
+        panel.add(btnEmptySpace4);
+        
+        JButton btnAdd = new JButton("Add");
+        btnAdd.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                canvas.setAction("add");
+            }
+        });
+        panel.add(btnAdd);
 
         //adds canvas below the buttons
         contentPane.add(canvas, BorderLayout.CENTER);

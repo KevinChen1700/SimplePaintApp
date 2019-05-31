@@ -14,4 +14,5 @@ public interface DrawAbleShape {
 	public void move(Point startDrag, Point endDrag); 
         public void resize(Point startDrag, Point endDrag);
 	public void makeObject(Point startDrag, Point endDrag);     
+        public void add(DrawAbleShape shape);
 }
