@@ -1,3 +1,7 @@
-Ellipse 286 57 229 102
-Ellipse 566 109 257 104
-Rectangle 131 132 350 175
+group 0
+    Rectangle 675 112 101 85
+    Rectangle 850 138 131 98
+    group 1
+        Rectangle 524 284 97 72
+        Rectangle 687 287 102 59
+        Rectangle 878 284 92 52

@@ -31,6 +31,7 @@ public class MyEllipse implements DrawAbleShape {
     @Override
     public void draw(Graphics2D g) {
         g.drawOval((int) getEllipse().getX(), (int) getEllipse().getY(), (int) getEllipse().getWidth(), (int) getEllipse().getHeight());
+        for(DrawAbleShape pt : components){pt.draw(g); }
     }
     
     @Override
@@ -54,7 +55,19 @@ public class MyEllipse implements DrawAbleShape {
 
     @Override
     public boolean contains(Point p) {
-        return this.getEllipse().contains(p);
+        if(this.getEllipse().contains(p))
+        {
+            return true;
+        }
+        else if(!(components.isEmpty()))
+        {
+            for(DrawAbleShape pt : components){
+                if (pt.contains(p)){return true;}
+            
+            }
+            return false;
+        }
+        else {return false;}
     }
 
     @Override
@@ -91,5 +104,9 @@ public class MyEllipse implements DrawAbleShape {
     
     public void add(DrawAbleShape shape) {
         this.components.add(shape);
+    }
+    
+    public ArrayList<DrawAbleShape> getComponents() {
+        return components;
     }
 }

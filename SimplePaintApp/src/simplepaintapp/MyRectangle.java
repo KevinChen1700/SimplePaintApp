@@ -1,9 +1,6 @@
 package simplepaintapp;
 
 import java.awt.*;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
@@ -29,6 +26,7 @@ public class MyRectangle implements DrawAbleShape {
     @Override
     public void draw(Graphics2D g) {
         g.drawRect(this.getRect().x, this.getRect().y, this.getRect().width, this.getRect().height);
+        for(DrawAbleShape pt : components){pt.draw(g); }
     }
     
     @Override
@@ -50,7 +48,19 @@ public class MyRectangle implements DrawAbleShape {
 
     @Override
     public boolean contains(Point p) {
-        return this.getRect().contains(p);
+        if(this.getRect().contains(p))
+        {
+            return true;
+        }
+        else if(!(components.isEmpty()))
+        {
+            for(DrawAbleShape pt : components){
+                if (pt.contains(p)){return true;}
+            
+            }
+            return false;
+        }
+        else {return false;}
     }
 
     @Override
@@ -87,6 +97,10 @@ public class MyRectangle implements DrawAbleShape {
     }
     public void add(DrawAbleShape shape) {
         this.components.add(shape);
+    }
+    
+    public ArrayList<DrawAbleShape> getComponents() {
+        return components;
     }
 
 }

@@ -26,8 +26,10 @@ public class AddCommand implements Command{
     public void execute ()
     {
      for(DrawAbleShape pt : shapes){
-           if (pt.contains(startDrag)) {
+           if (pt.contains(startDrag) && selectedShape != null) {
                selectedShape.add(pt);
+               shapes.remove(pt);
+               return;
            }
        }
     }

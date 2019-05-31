@@ -1,9 +1,8 @@
 package simplepaintapp;
 
 import java.awt.Point;
-import java.io.BufferedWriter;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 
 //interface for drawable objects
 public interface DrawAbleShape {
@@ -15,4 +14,5 @@ public interface DrawAbleShape {
         public void resize(Point startDrag, Point endDrag);
 	public void makeObject(Point startDrag, Point endDrag);     
         public void add(DrawAbleShape shape);
+        public ArrayList<DrawAbleShape> getComponents();
 }
