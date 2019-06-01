@@ -30,6 +30,10 @@ public class Canvas extends JComponent {
                     SelectCommand select = new SelectCommand(shapes);
                     invoker.execute(select);
                 }
+                else if(action == "add"){
+                    AddCommand add = new AddCommand(ptemp, shapes, startDrag);
+                    invoker.execute(add);
+                }
             }
             
             //after releasing mouse drag, draw the corresponding object

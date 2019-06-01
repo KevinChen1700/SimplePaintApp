@@ -7,10 +7,12 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 
 public class MyEllipse implements DrawAbleShape {
 
     private Ellipse2D elip;
+    private ArrayList<DrawAbleShape> components = new ArrayList<DrawAbleShape>();
 
     public MyEllipse() {
 
@@ -29,11 +31,13 @@ public class MyEllipse implements DrawAbleShape {
     @Override
     public void draw(Graphics2D g) {
         g.drawOval((int) getEllipse().getX(), (int) getEllipse().getY(), (int) getEllipse().getWidth(), (int) getEllipse().getHeight());
+        for(DrawAbleShape pt : components){pt.draw(g); }
     }
     
     @Override
     public void drawPoints(Graphics2D g, Point startDrag, Point endDrag) {
         g.drawOval((int) this.getEllipse().getX() + endDrag.x - startDrag.x, (int) this.getEllipse().getY() + endDrag.y - startDrag.y, (int) this.getEllipse().getWidth(), (int) this.getEllipse().getHeight());
+        for(DrawAbleShape pt : components){pt.drawPoints(g, startDrag, endDrag); }
     }
     
     //draws a resized version of the object but this version can't have a width and/or height of less than 1
@@ -45,17 +49,31 @@ public class MyEllipse implements DrawAbleShape {
         if(h<1)h=1;
 
         g.drawOval((int)elip.getX(), (int) elip.getY(), w, h);
+        for(DrawAbleShape pt : components){pt.drawExpand(g, w, h); }
     }
 
 
     @Override
     public boolean contains(Point p) {
-        return this.getEllipse().contains(p);
+        if(this.getEllipse().contains(p))
+        {
+            return true;
+        }
+        else if(!(components.isEmpty()))
+        {
+            for(DrawAbleShape pt : components){
+                if (pt.contains(p)){return true;}
+            
+            }
+            return false;
+        }
+        else {return false;}
     }
 
     @Override
     public void move(Point startDrag, Point endDrag) {
         this.getEllipse().setFrame(getEllipse().getX() + endDrag.x - startDrag.x, this.getEllipse().getY() + endDrag.y - startDrag.y, this.getEllipse().getWidth(), this.getEllipse().getHeight());
+        for(DrawAbleShape pt : components){pt.move(startDrag, endDrag); }
     }
 
     //resizes the object but not to less than 1 width and/or 1 height
@@ -73,6 +91,7 @@ public class MyEllipse implements DrawAbleShape {
         }
         Ellipse2D e = new Ellipse2D.Float((int) this.getEllipse().getX(), (int) this.getEllipse().getY(), (int) this.getEllipse().getWidth() + x, (int) this.getEllipse().getHeight() + y);
         this.setEllipse(e);
+        for(DrawAbleShape pt : components){pt.resize(startDrag, endDrag); }
     }
 
     public Ellipse2D getEllipse() {
@@ -81,5 +100,13 @@ public class MyEllipse implements DrawAbleShape {
 
     public void setEllipse(Ellipse2D ellipse) {
         this.elip = ellipse;
+    }
+    
+    public void add(DrawAbleShape shape) {
+        this.components.add(shape);
+    }
+    
+    public ArrayList<DrawAbleShape> getComponents() {
+        return components;
     }
 }

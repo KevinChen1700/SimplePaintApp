@@ -1,14 +1,13 @@
 package simplepaintapp;
 
 import java.awt.*;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 
 public class MyRectangle implements DrawAbleShape {
 
     private Rectangle rect;
+    private ArrayList<DrawAbleShape> components = new ArrayList<DrawAbleShape>();
 
     public MyRectangle() {
 
@@ -27,11 +26,13 @@ public class MyRectangle implements DrawAbleShape {
     @Override
     public void draw(Graphics2D g) {
         g.drawRect(this.getRect().x, this.getRect().y, this.getRect().width, this.getRect().height);
+        for(DrawAbleShape pt : components){pt.draw(g); }
     }
     
     @Override
     public void drawPoints(Graphics2D g, Point startDrag, Point endDrag) {
         g.drawRect(this.getRect().x + endDrag.x - startDrag.x, this.getRect().y + endDrag.y - startDrag.y, this.getRect().width, this.getRect().height);
+        for(DrawAbleShape pt : components){pt.drawPoints(g, startDrag, endDrag); }
     }
     
     //draws a resized version of the object but this version can't have a width and/or height of less than 1
@@ -42,17 +43,31 @@ public class MyRectangle implements DrawAbleShape {
         if (w < 1) w=1;
         if (h < 1) h =1;
         g.drawRect(rect.x, rect.y, w, h);
+        for(DrawAbleShape pt : components){pt.drawExpand(g, w, h); }
     }
 
     @Override
     public boolean contains(Point p) {
-        return this.getRect().contains(p);
+        if(this.getRect().contains(p))
+        {
+            return true;
+        }
+        else if(!(components.isEmpty()))
+        {
+            for(DrawAbleShape pt : components){
+                if (pt.contains(p)){return true;}
+            
+            }
+            return false;
+        }
+        else {return false;}
     }
 
     @Override
     public void move(Point startDrag, Point endDrag) {
         Rectangle r = new Rectangle(this.getRect().x + (endDrag.x - startDrag.x), this.getRect().y + (endDrag.y - startDrag.y), this.getRect().width, this.getRect().height);
         this.setRect(r);
+        for(DrawAbleShape pt : components){pt.move(startDrag, endDrag); }
     }
 
     //resizes the object but not to less than 1 width and/or 1 height
@@ -70,6 +85,7 @@ public class MyRectangle implements DrawAbleShape {
         }
         Rectangle r= new Rectangle(this.getRect().x, this.getRect().y, this.getRect().width + x, this.getRect().height + y);
         this.setRect(r);
+        for(DrawAbleShape pt : components){pt.resize(startDrag, endDrag); }
     }
 
     public Rectangle getRect() {
@@ -78,6 +94,13 @@ public class MyRectangle implements DrawAbleShape {
 
     public void setRect(Rectangle rect) {
         this.rect = rect;
+    }
+    public void add(DrawAbleShape shape) {
+        this.components.add(shape);
+    }
+    
+    public ArrayList<DrawAbleShape> getComponents() {
+        return components;
     }
 
 }

@@ -12,6 +12,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
+import java.util.Arrays;
 
 /**
  *
@@ -30,19 +31,40 @@ public class LoadCommand implements Command {
             shapes.clear();
             BufferedReader reader = new BufferedReader(new FileReader("save.txt"));
             String line = reader.readLine();
+            int tabCount = 0;
+            boolean needGroup = false;
+            ArrayList<ArrayList<DrawAbleShape>> groups = new ArrayList();
+            groups.add(shapes);
+            int groupCount = 0;
+            ArrayList<DrawAbleShape> currentShapes = shapes;
+            
             while (line != null) {
-		String[] splitted = line.split(" ");
-                if("Rectangle".equals(splitted[0])){
-                    MyRectangle obj = new MyRectangle();
-                    Rectangle rect = new Rectangle(Integer.parseInt(splitted[1]), Integer.parseInt(splitted[2]), Integer.parseInt(splitted[3]), Integer.parseInt(splitted[4]));
-                    obj.setRect(rect);
-                    shapes.add(obj);
+                String[] splitted = line.split("\\s+");
+                if("".equals(splitted[0])){splitted = Arrays.copyOfRange(splitted, 1, splitted.length);}
+                
+                if(needGroup){                 
+                    DrawAbleShape tempObj = lineToShape(splitted);
+                    groups.get(groupCount).add(tempObj);
+                    groups.add(tempObj.getComponents());
+                    groupCount++;
+                    needGroup = false;
                 }
-                else if ("Ellipse".equals(splitted[0])){
-                    MyEllipse obj = new MyEllipse();
-                    Ellipse2D elip = new Ellipse2D.Float(Integer.parseInt(splitted[1]), Integer.parseInt(splitted[2]), Integer.parseInt(splitted[3]), Integer.parseInt(splitted[4]));
-                    obj.setEllipse(elip);
-                    shapes.add(obj);
+                int tempTabCount = 0;
+                for(char c : line.toCharArray()){
+                    char s = ' ';
+                    if(' ' == c)
+                    { tempTabCount++; }
+                    else{break;}
+                }
+                if(tempTabCount < tabCount){groupCount--;}
+                else if(tempTabCount > tabCount){tabCount = tempTabCount;}
+                
+                if("group".equals(splitted[0])){
+                    needGroup = true;
+                }
+                else {
+                    DrawAbleShape tempObj = lineToShape(splitted);
+                    groups.get(groupCount).add(tempObj);
                 
                 }
 		// read next line
@@ -52,6 +74,23 @@ public class LoadCommand implements Command {
             canvas.repaint();
         
         }catch(IOException e){ e.printStackTrace();}
+    }
+    
+    private DrawAbleShape lineToShape(String[] splitted){
+        if("Rectangle".equals(splitted[0])){
+                    MyRectangle obj = new MyRectangle();
+                    Rectangle rect = new Rectangle(Integer.parseInt(splitted[1]), Integer.parseInt(splitted[2]), Integer.parseInt(splitted[3]), Integer.parseInt(splitted[4]));
+                    obj.setRect(rect);
+                    return obj;
+                }
+        else {
+                    MyEllipse obj = new MyEllipse();
+                    Ellipse2D elip = new Ellipse2D.Float(Integer.parseInt(splitted[1+tabCount]), Integer.parseInt(splitted[2+tabCount]), Integer.parseInt(splitted[3+tabCount]), Integer.parseInt(splitted[4+tabCount]));
+                    obj.setEllipse(elip);
+                    return obj;
+                
+                }
+        
     }
     
     
