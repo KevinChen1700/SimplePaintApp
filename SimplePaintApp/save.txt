@@ -1,11 +1,4 @@
-Rectangle 931 51 92 47
-Rectangle 888 181 68 71
-Rectangle 1032 189 85 86
-Rectangle 1091 19 45 45
-group 0
-    Rectangle 400 42 187 162
-    Rectangle 656 42 117 74
-    group 1
-        Rectangle 408 285 59 44
-        Rectangle 641 278 122 59
-    Rectangle -6 274 33 44
+Rectangle 260 69 146 163
+Rectangle 573 127 192 125
+Rectangle 869 129 189 130
+Rectangle 36 76 161 114
