@@ -42,7 +42,9 @@ public class Shape {
     public void draw(Graphics g){delegate.draw(g, x, y, w, h);}
     
     public boolean contains(Point p){
-        if(p.x <= x && p.x >= w && p.y <= y && p.y >= h){return true;}
+        System.out.print("-" + toString() + "-");
+        System.out.print("-" +  p.x + "  " + p.y + "-");
+        if(p.x >= x && p.x <= (x + w) && p.y >= y && p.y <= (y + h)){return true;}
         else{return false;}
     }
     

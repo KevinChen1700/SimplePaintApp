@@ -1,4 +1,3 @@
-Rectangle 260 69 146 163
-Rectangle 573 127 192 125
-Rectangle 869 129 189 130
-Rectangle 36 76 161 114
+Rectangle 208 16 375 268
+Rectangle 661 31 153 135
+Rectangle 850 107 239 170

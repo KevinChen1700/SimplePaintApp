@@ -113,6 +113,7 @@ public class Canvas extends JComponent {
             invoker.execute(drawShape);
         }
         
+        g.setColor(Color.black);
         for (Shape pt : shapes) {
             
             DrawShapeCommand drawShape = new DrawShapeCommand(pt, g);
