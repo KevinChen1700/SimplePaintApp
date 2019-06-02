@@ -6,26 +6,29 @@
 package simplepaintapp;
 import java.awt.Point;
 import java.util.ArrayList;
+import javax.swing.JComponent;
 
 /**
  *
  * @author Kevin
  */
-public class MakeObjectEllip extends ObjectCommand {
-    private MyEllipse obj;
-    ArrayList<DrawAbleShape> shapes;
-    public MakeObjectEllip(ArrayList<DrawAbleShape> shapes, MyEllipse obj, Point startDrag, Point endDrag ){
+public class CreateShape extends ObjectCommand {
+    private ArrayList<Shape> shapes;
+    private Shape obj;
+    public CreateShape(ArrayList<Shape> shapes, Strategy delegate, Point startDrag, Point endDrag){
       this.shapes = shapes;
-      this.obj = obj;
-      obj.makeObject(startDrag, endDrag);
+      obj = new Shape(Math.min(startDrag.x, endDrag.x), Math.min(startDrag.y, endDrag.y), Math.abs(startDrag.x - endDrag.x), Math.abs(startDrag.y - endDrag.y), delegate);
+
    }
     
     public void execute() {
       shapes.add(obj);
    }
    
+    @Override
     public void undo(){ shapes.remove(obj);}
     
+    @Override
     public void redo(){ shapes.add(obj);}
 
 }

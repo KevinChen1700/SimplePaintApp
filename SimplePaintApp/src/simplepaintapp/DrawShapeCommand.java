@@ -5,18 +5,23 @@
  */
 package simplepaintapp;
 
-import static simplepaintapp.Canvas.pt;
-import static simplepaintapp.Canvas.g;
+import java.awt.Graphics;
 
 
 /**
  *
  * @author Kevin
  */
-public class DrawShapesCommand implements Command {
+public class DrawShapeCommand implements Command {
+    private Shape shape;
+    private Graphics g;
+    public DrawShapeCommand(Shape shape, Graphics g){
+        this.shape = shape;
+        this.g = g;
+    }
     
     public void execute()
     {
-      pt.draw(g);
+      shape.draw(g);
     }
 }

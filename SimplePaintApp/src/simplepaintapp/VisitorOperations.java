@@ -6,6 +6,8 @@
 package simplepaintapp;
 
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Point;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -13,35 +15,39 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static simplepaintapp.Invoker.undoStack;
-import static simplepaintapp.Canvas.endDrag;
-import static simplepaintapp.Canvas.g;
-import static simplepaintapp.Canvas.ptemp;
-import static simplepaintapp.Canvas.startDrag;
 /**
  *
  * @author Kevin
  */
 public class VisitorOperations  implements Visitor {
+    
+    public VisitorOperations(){}
 
     public void visitMove(Move object) {
-     object.getObject().move(object.getStartDrag(), object.getEndDrag());
+     Shape shape = object.getObject();
+     shape.setX(shape.getX()+object.getEndDrag().x - object.getStartDrag().x);
+     shape.setY(shape.getY()+object.getEndDrag().y - object.getStartDrag().y);
      if(object instanceof ObjectCommand ){undoStack.push(object);}
     }
     
     public void visitResize (Resize object){
-     object.getObject().resize(object.getStartDrag(), object.getEndDrag());
+     Shape shape = object.getObject();
+     shape.setW(shape.getW()+object.getEndDrag().x - object.getStartDrag().x);
+     shape.setH(shape.getH()+object.getEndDrag().y - object.getStartDrag().y);
      if(object instanceof ObjectCommand ){undoStack.push(object);}
     }
     
-    public void drawMove(){
+    public void drawMove(Graphics g, Shape ptemp , Point startDrag, Point endDrag){
         g.setColor(Color.RED);
-        ptemp.drawPoints(g, startDrag, endDrag);
+        ptemp.setX(ptemp.getX()+endDrag.x - startDrag.x);
+        ptemp.setY(ptemp.getY()+endDrag.y - startDrag.y);
+        ptemp.draw(g);
     }
-    public void drawResize(){
+    public void drawResize(Graphics g, Shape ptemp , Point startDrag, Point endDrag){
        g.setColor(Color.RED);
-       int w = endDrag.x - startDrag.x;
-       int h = endDrag.y - startDrag.y;
-       ptemp.drawExpand(g, w, h);
+       ptemp.setW(ptemp.getW()+endDrag.x - startDrag.x);
+       ptemp.setH(ptemp.getH()+endDrag.y - startDrag.y);
+       ptemp.draw(g);
     }
         
     public void visitSave (VisitorSave saveFile)
@@ -51,55 +57,20 @@ public class VisitorOperations  implements Visitor {
         writeList(saveFile.getShapes(), writer, 0, "" );
         writer.close();
         }
-         catch (FileNotFoundException ex) {
-            Logger.getLogger(SaveCommand.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.print("File not found.");
-        } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(SaveCommand.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.print("Unsopperted encoding format used.");
+         catch (Exception ex) {
+            System.out.print("Error.");
         }
     }
 
-    private void writeList(ArrayList<DrawAbleShape> shapes, PrintWriter writer, int groupCount, String tabs){
-        for(DrawAbleShape shape : shapes){
-            ArrayList<DrawAbleShape> ptComponents = shape.getComponents();
+    private void writeList(ArrayList<Shape> shapes, PrintWriter writer, int groupCount, String tabs){
+        for(Shape shape : shapes){
+            ArrayList<Shape> ptComponents = shape.getComponents();
             if(!(ptComponents.isEmpty())){
                 writer.println(tabs + "group " + groupCount);
                 writeList(ptComponents, writer, groupCount + 1, tabs + "    ");
-                } else{writer.println(tabs + getLine(shape));}
-        }
-           
-            
-        }
-    
-    private String getLine(DrawAbleShape pt){
-        String line = "";
-        if(pt instanceof MyRectangle){
-                line += "Rectangle ";
-                MyRectangle temp = ((MyRectangle) pt);
-                line += (Math.round(temp.getRect().getX()));
-                line += " ";
-                line += (Math.round(temp.getRect().getY()));
-                line += " ";
-                line += (Math.round(temp.getRect().getWidth()));
-                line += " ";
-                line += (Math.round(temp.getRect().getHeight()));
-                return line;
-                
+                } else{writer.println(tabs + shape.toString());}
             }
-        else{
-                line += "Ellipse ";
-                MyEllipse temp = ((MyEllipse) pt);
-                line += (Math.round(temp.getEllipse().getX()));
-                line += " ";
-                line += (Math.round(temp.getEllipse().getY()));
-                line += " ";
-                line += (Math.round(temp.getEllipse().getWidth()));
-                line += " ";
-                line += (Math.round(temp.getEllipse().getHeight()));
-                return line;
-            }
-    
-    }
+        }
+
 
 }

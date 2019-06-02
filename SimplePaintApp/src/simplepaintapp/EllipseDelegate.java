@@ -12,6 +12,15 @@ import java.awt.Graphics;
  * @author Sjimmie
  */
 public class EllipseDelegate implements Strategy {
+    private static EllipseDelegate instance;
+    private EllipseDelegate(){}
+    public static EllipseDelegate getInstance(){
+        if(instance == null){
+            instance  = new EllipseDelegate();
+        }
+        return instance;
+    }
+    
     
     @Override
     public void draw(Graphics g, int x, int y, int w, int h) {

@@ -12,6 +12,14 @@ import java.awt.Graphics;
  * @author Sjimmie
  */
 public class RectangleDelegate implements Strategy{
+    private static RectangleDelegate instance;
+    private RectangleDelegate(){}
+    public static RectangleDelegate getInstance(){
+        if(instance == null){
+            instance  = new RectangleDelegate();
+        }
+        return instance;
+    }
 
     @Override
     public void draw(Graphics g, int x, int y, int w, int h) {

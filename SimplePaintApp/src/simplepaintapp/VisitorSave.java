@@ -17,9 +17,9 @@ import java.util.logging.Logger;
  * @author Kevin
  */
 public class VisitorSave implements Visitable {
-    private ArrayList<DrawAbleShape> shapes;
+    private ArrayList<Shape> shapes;
     
-    public VisitorSave(ArrayList<DrawAbleShape> shapes){
+    public VisitorSave(ArrayList<Shape> shapes){
         this.shapes = shapes;
     }
         //accept the visitor
@@ -27,7 +27,7 @@ public class VisitorSave implements Visitable {
     {
         visitor.visitSave(this);
     }
-    public ArrayList<DrawAbleShape> getShapes(){
+    public ArrayList<Shape> getShapes(){
         return shapes;
     }
 }

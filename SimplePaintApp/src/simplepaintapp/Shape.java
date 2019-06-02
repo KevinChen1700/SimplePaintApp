@@ -6,6 +6,8 @@
 package simplepaintapp;
 
 import java.awt.Graphics;
+import java.awt.Point;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,6 +19,7 @@ public class Shape {
     private int w;
     private int h;
     private Strategy delegate;
+    private ArrayList<Shape> components = new ArrayList<Shape>();
     
     public Shape(int x, int y, int w, int h, Strategy delegate ){
         this.x = x;
@@ -37,5 +40,15 @@ public class Shape {
     public int getW(){return w;}
     
     public void draw(Graphics g){delegate.draw(g, x, y, w, h);}
+    
+    public boolean contains(Point p){
+        if(p.x <= x && p.x >= w && p.y <= y && p.y >= h){return true;}
+        else{return false;}
+    }
+    
+    public void add(Shape s){components.add(s);}
+    public ArrayList<Shape> getComponents(){return components;} 
+    
+    public String toString(){return delegate.toString() + " " + x + " " + y + " " + w + " " + h;}
     
 }

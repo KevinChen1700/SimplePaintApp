@@ -14,13 +14,22 @@ import java.awt.Point;
 public class Resize extends ObjectCommand implements Visitable {
     private Point startDrag;
     private Point endDrag ;
-    private DrawAbleShape object;
+    private Shape object;
     
-    public Resize(Point startDrag, Point endDrag, DrawAbleShape object)
+    public Resize(Point startDrag, Point endDrag, Shape object)
     {
          this.startDrag = startDrag;
          this.endDrag = endDrag;
          this.object = object;
+         
+        int x = endDrag.x - startDrag.x;
+        int y = endDrag.y - startDrag.y;
+        if ((object.getW() + x) < 1) {
+            endDrag.x = startDrag.x - object.getW();
+        }
+        if ((object.getH() + y) < 1) {
+            endDrag.y = startDrag.y - object.getH();
+        }
     }
     
     //accept the visitor
@@ -34,9 +43,14 @@ public class Resize extends ObjectCommand implements Visitable {
     public Point getEndDrag(){
          return endDrag;
     }
-    public DrawAbleShape getObject(){
+    public Shape getObject(){
          return object;
     }
-    public void undo(){ object.resize(endDrag, startDrag);}
-    public void redo(){ object.resize(startDrag, endDrag);}
+    
+    private void resize(Point startDrag, Point endDrag){
+        object.setW(object.getW()+endDrag.x - startDrag.x);
+        object.setH(object.getH()+endDrag.y - startDrag.y);
+    }
+    public void undo(){ resize(endDrag, startDrag);}
+    public void redo(){ resize(startDrag, endDrag);}
 }

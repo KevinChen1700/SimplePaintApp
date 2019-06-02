@@ -3,14 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/MyRectangle.java</file>
-            <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/MyEllipse.java</file>
+            <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/DrawShapeCommand.java</file>
             <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/Canvas.java</file>
-            <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/DrawAbleShape.java</file>
-            <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/SaveCommand.java</file>
+            <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/Resize.java</file>
             <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/VisitorSave.java</file>
-            <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/GUI.java</file>
+            <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/Strategy.java</file>
             <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/VisitorOperations.java</file>
+            <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/AddCommand.java</file>
+            <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/Shape.java</file>
+            <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/LoadCommand.java</file>
+            <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/RectangleDelegate.java</file>
+            <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/SelectCommand.java</file>
+            <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/EllipseDelegate.java</file>
+            <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/Move.java</file>
+            <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/GUI.java</file>
+            <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/Visitor.java</file>
+            <file>file:/C:/Users/Sjimmie/Documents/GitHub/hAhAdesignpatterns/SimplePaintApp/src/simplepaintapp/CreateShape.java</file>
         </group>
     </open-files>
 </project-private>

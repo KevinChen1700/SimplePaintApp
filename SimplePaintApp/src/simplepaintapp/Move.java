@@ -14,9 +14,9 @@ import java.awt.Point;
 public class Move extends ObjectCommand implements Visitable {
     private Point startDrag;
     private Point endDrag;
-    private DrawAbleShape object;
+    private Shape object;
     
-     public Move(Point startDrag, Point endDrag, DrawAbleShape object)
+     public Move(Point startDrag, Point endDrag, Shape object)
     {
          this.startDrag = startDrag;
          this.endDrag = endDrag;
@@ -34,10 +34,14 @@ public class Move extends ObjectCommand implements Visitable {
     public Point getEndDrag(){
         return endDrag;
     }
-    public DrawAbleShape getObject(){
+    public Shape getObject(){
         return object;
     }
+    private void move(Point startDrag, Point endDrag){
+        object.setX(object.getX()+endDrag.x - startDrag.x);
+        object.setY(object.getY()+endDrag.y - startDrag.y);
+    }
     
-    public void undo(){ object.move(endDrag, startDrag);}
-    public void redo(){ object.move(startDrag, endDrag);}
+    public void undo(){ move(endDrag, startDrag);}
+    public void redo(){ move(startDrag, endDrag);}
 }

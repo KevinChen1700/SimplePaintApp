@@ -14,10 +14,10 @@ import java.util.ArrayList;
  * @author Sjimmie
  */
 public class AddCommand implements Command{
-    private DrawAbleShape selectedShape;
-    private ArrayList<DrawAbleShape> shapes;
+    private Shape selectedShape;
+    private ArrayList<Shape> shapes;
     private Point startDrag;
-    public AddCommand(DrawAbleShape selectedShape, ArrayList<DrawAbleShape> shapes, Point startDrag){ 
+    public AddCommand(Shape selectedShape, ArrayList<Shape> shapes, Point startDrag){ 
         this.selectedShape = selectedShape;
         this.shapes = shapes;
         this.startDrag = startDrag;
@@ -25,7 +25,7 @@ public class AddCommand implements Command{
     
     public void execute ()
     {
-     for(DrawAbleShape pt : shapes){
+     for(Shape pt : shapes){
            if (pt.contains(startDrag) && selectedShape != null) {
                selectedShape.add(pt);
                shapes.remove(pt);

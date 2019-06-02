@@ -19,7 +19,7 @@ import java.util.Arrays;
  * @author Sjimmie
  */
 public class LoadCommand implements Command {
-    private ArrayList<DrawAbleShape> shapes;
+    private ArrayList<Shape> shapes;
     private Canvas canvas;
     public LoadCommand(Canvas canvas){
         this.canvas = canvas;
@@ -33,17 +33,17 @@ public class LoadCommand implements Command {
             String line = reader.readLine();
             int tabCount = 0;
             boolean needGroup = false;
-            ArrayList<ArrayList<DrawAbleShape>> groups = new ArrayList();
+            ArrayList<ArrayList<Shape>> groups = new ArrayList();
             groups.add(shapes);
             int groupCount = 0;
-            ArrayList<DrawAbleShape> currentShapes = shapes;
+            ArrayList<Shape> currentShapes = shapes;
             
             while (line != null) {
                 String[] splitted = line.split("\\s+");
                 if("".equals(splitted[0])){splitted = Arrays.copyOfRange(splitted, 1, splitted.length);}
                 
                 if(needGroup){                 
-                    DrawAbleShape tempObj = lineToShape(splitted);
+                    Shape tempObj = lineToShape(splitted);
                     groups.get(groupCount).add(tempObj);
                     groups.add(tempObj.getComponents());
                     groupCount++;
@@ -63,7 +63,7 @@ public class LoadCommand implements Command {
                     needGroup = true;
                 }
                 else {
-                    DrawAbleShape tempObj = lineToShape(splitted);
+                    Shape tempObj = lineToShape(splitted);
                     groups.get(groupCount).add(tempObj);
                 
                 }
@@ -76,20 +76,18 @@ public class LoadCommand implements Command {
         }catch(IOException e){ e.printStackTrace();}
     }
     
-    private DrawAbleShape lineToShape(String[] splitted){
+    private Shape lineToShape(String[] splitted){
         if("Rectangle".equals(splitted[0])){
-                    MyRectangle obj = new MyRectangle();
-                    Rectangle rect = new Rectangle(Integer.parseInt(splitted[1]), Integer.parseInt(splitted[2]), Integer.parseInt(splitted[3]), Integer.parseInt(splitted[4]));
-                    obj.setRect(rect);
+                    RectangleDelegate delegate = RectangleDelegate.getInstance();
+                    Shape obj = new Shape(Integer.parseInt(splitted[1]), Integer.parseInt(splitted[2]), Integer.parseInt(splitted[3]), Integer.parseInt(splitted[4]), delegate);
                     return obj;
-                }
+       }
         else {
-                    MyEllipse obj = new MyEllipse();
-                    Ellipse2D elip = new Ellipse2D.Float(Integer.parseInt(splitted[1]), Integer.parseInt(splitted[2]), Integer.parseInt(splitted[3]), Integer.parseInt(splitted[4]));
-                    obj.setEllipse(elip);
+                    EllipseDelegate delegate = EllipseDelegate.getInstance();
+                    Shape obj = new Shape(Integer.parseInt(splitted[1]), Integer.parseInt(splitted[2]), Integer.parseInt(splitted[3]), Integer.parseInt(splitted[4]), delegate);
                     return obj;
                 
-                }
+        }
         
     }
     
