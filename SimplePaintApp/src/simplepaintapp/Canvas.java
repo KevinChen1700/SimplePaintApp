@@ -105,8 +105,10 @@ public class Canvas extends JComponent {
                 if (ptemp.contains(startDrag)) {
                     if (action == "move") {
                         visitor.drawMove(g, ptemp, startDrag, endDrag);
+                        g.drawString("Moving", ptemp.getX(), ptemp.getY());
                     } else if (action == "resize") {
                         visitor.drawResize(g, ptemp, startDrag, endDrag);
+                        g.drawString("Resizing", ptemp.getX(), ptemp.getY());
                     }
                 } else {
                     g.setColor(Color.red);

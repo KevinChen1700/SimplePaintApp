@@ -45,6 +45,7 @@ public class VisitorOperations  implements Visitor {
         
         g.setColor(Color.RED);
         g.drawRect((ptemp.getX()+endDrag.x - startDrag.x), (ptemp.getY()+endDrag.y - startDrag.y), ptemp.getW(), ptemp.getH());
+       // g.drawString("Moving figure", ptemp.getX(), ptemp.getY());
     }
     public void drawResize(Graphics g, Shape ptemp , Point startDrag, Point endDrag){
 //       g.setColor(Color.RED);
@@ -54,6 +55,7 @@ public class VisitorOperations  implements Visitor {
        
         g.setColor(Color.RED);
         g.drawRect(ptemp.getX(), ptemp.getY(), (ptemp.getW()+endDrag.x - startDrag.x), (ptemp.getH()+endDrag.y - startDrag.y));
+        //g.drawString("Resizing figure", ptemp.getX(), ptemp.getY());
        
     }
         
