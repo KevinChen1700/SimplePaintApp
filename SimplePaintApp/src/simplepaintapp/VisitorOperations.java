@@ -38,16 +38,23 @@ public class VisitorOperations  implements Visitor {
     }
     
     public void drawMove(Graphics g, Shape ptemp , Point startDrag, Point endDrag){
+//        g.setColor(Color.RED);
+//        ptemp.setX(ptemp.getX()+endDrag.x - startDrag.x);
+//        ptemp.setY(ptemp.getY()+endDrag.y - startDrag.y);
+//        ptemp.draw(g);
+        
         g.setColor(Color.RED);
-        ptemp.setX(ptemp.getX()+endDrag.x - startDrag.x);
-        ptemp.setY(ptemp.getY()+endDrag.y - startDrag.y);
-        ptemp.draw(g);
+        g.drawRect((ptemp.getX()+endDrag.x - startDrag.x), (ptemp.getY()+endDrag.y - startDrag.y), ptemp.getW(), ptemp.getH());
     }
     public void drawResize(Graphics g, Shape ptemp , Point startDrag, Point endDrag){
-       g.setColor(Color.RED);
-       ptemp.setW(ptemp.getW()+endDrag.x - startDrag.x);
-       ptemp.setH(ptemp.getH()+endDrag.y - startDrag.y);
-       ptemp.draw(g);
+//       g.setColor(Color.RED);
+//       ptemp.setW(ptemp.getW()+endDrag.x - startDrag.x);
+//       ptemp.setH(ptemp.getH()+endDrag.y - startDrag.y);
+//       ptemp.draw(g);
+       
+        g.setColor(Color.RED);
+        g.drawRect(ptemp.getX(), ptemp.getY(), (ptemp.getW()+endDrag.x - startDrag.x), (ptemp.getH()+endDrag.y - startDrag.y));
+       
     }
         
     public void visitSave (VisitorSave saveFile)

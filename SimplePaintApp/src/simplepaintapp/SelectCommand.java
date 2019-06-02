@@ -34,6 +34,7 @@ public class SelectCommand implements Command {
                }
                ptemp = pt; 
                shapes.remove(pt);
+               break;
            }
      System.out.print("REEE");
        }
