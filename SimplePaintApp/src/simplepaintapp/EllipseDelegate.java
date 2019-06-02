@@ -24,7 +24,7 @@ public class EllipseDelegate implements Strategy {
     
     @Override
     public void draw(Graphics g, int x, int y, int w, int h) {
-        g.drawOval(x, y, h, h);
+        g.drawOval(x, y, w, h);
     }
     
     @Override

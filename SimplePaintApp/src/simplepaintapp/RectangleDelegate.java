@@ -23,7 +23,7 @@ public class RectangleDelegate implements Strategy{
 
     @Override
     public void draw(Graphics g, int x, int y, int w, int h) {
-        g.drawRect(x, y, h, h);
+        g.drawRect(x, y, w, h);
     }
     
     @Override
