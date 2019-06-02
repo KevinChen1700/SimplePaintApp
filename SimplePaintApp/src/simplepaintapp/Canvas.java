@@ -94,10 +94,12 @@ public class Canvas extends JComponent {
                 Shape obj = new Shape(Math.min(startDrag.x, endDrag.x), Math.min(startDrag.y, endDrag.y), Math.abs(startDrag.x - endDrag.x), Math.abs(startDrag.y - endDrag.y), rectangle);
                 DrawShapeCommand drawShape = new DrawShapeCommand(obj, g);
                 invoker.execute(drawShape);
+                g.drawString("Rectangle", obj.getX(), obj.getY());
             } else if (action == "Ellipse") {
                 Shape obj = new Shape(Math.min(startDrag.x, endDrag.x), Math.min(startDrag.y, endDrag.y), Math.abs(startDrag.x - endDrag.x), Math.abs(startDrag.y - endDrag.y), ellipse);
                 DrawShapeCommand drawShape = new DrawShapeCommand(obj, g);
                 invoker.execute(drawShape);
+                g.drawString("Ellipse", obj.getX(), obj.getY());
             }
             if (ptemp != null) {
                 if (ptemp.contains(startDrag)) {
