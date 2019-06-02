@@ -84,6 +84,11 @@ public class Canvas extends JComponent {
     public void paint(Graphics graphicsAdapter) {
         
         g = (Graphics2D) graphicsAdapter;
+        for (Shape pt : shapes) {
+            
+            DrawShapeCommand drawShape = new DrawShapeCommand(pt, g);
+            invoker.execute(drawShape);
+        }
         if (startDrag != null && endDrag != null && action != "select") {
             if (action == "Rectangle") {
                 Shape obj = new Shape(Math.min(startDrag.x, endDrag.x), Math.min(startDrag.y, endDrag.y), Math.abs(startDrag.x - endDrag.x), Math.abs(startDrag.y - endDrag.y), rectangle);
@@ -113,11 +118,7 @@ public class Canvas extends JComponent {
             invoker.execute(drawShape);
         }
         
-        g.setColor(Color.black);
-        for (Shape pt : shapes) {
-            
-            DrawShapeCommand drawShape = new DrawShapeCommand(pt, g);
-            invoker.execute(drawShape);
-        }
+        
+        
     }
 }
