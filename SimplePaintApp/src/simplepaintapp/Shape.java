@@ -58,8 +58,6 @@ public class Shape {
     public void add(Shape s){components.add(s);}
     public void addText(Decorator d){decorators.add(d);}
     public ArrayList<Shape> getComponents(){return components;} 
-    public ArrayList<Decorator> getDecorators(){return decorators;} 
-    
+    public ArrayList<Decorator> getDecorators(){return decorators;}
     public String toString(){return delegate.toString() + " " + x + " " + y + " " + w + " " + h;}
-    
 }

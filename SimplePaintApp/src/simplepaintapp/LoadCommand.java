@@ -65,7 +65,6 @@ public class LoadCommand implements Command {
                 else {
                     Shape tempObj = lineToShape(splitted);
                     groups.get(groupCount).add(tempObj);
-                
                 }
 		// read next line
 		line = reader.readLine();
@@ -86,10 +85,6 @@ public class LoadCommand implements Command {
                     EllipseDelegate delegate = EllipseDelegate.getInstance();
                     Shape obj = new Shape(Integer.parseInt(splitted[1]), Integer.parseInt(splitted[2]), Integer.parseInt(splitted[3]), Integer.parseInt(splitted[4]), delegate);
                     return obj;
-                
         }
-        
     }
-    
-    
 }

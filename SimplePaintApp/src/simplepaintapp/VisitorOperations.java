@@ -67,6 +67,4 @@ public class VisitorOperations  implements Visitor {
                 } else{writer.println(tabs + shape.toString());}
             }
         }
-
-
 }
