@@ -20,8 +20,6 @@ public class AddDecorator extends ObjectCommand {
      this.decorator = decorator;
     }
     
-    
-    
     public void execute()
     {
         decorators.add(decorator);
