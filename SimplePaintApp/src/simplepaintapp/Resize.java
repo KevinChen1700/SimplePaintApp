@@ -50,6 +50,19 @@ public class Resize extends ObjectCommand implements Visitable {
     private void resize(Point startDrag, Point endDrag){
         object.setW(object.getW()+endDrag.x - startDrag.x);
         object.setH(object.getH()+endDrag.y - startDrag.y);
+        for (Shape s : object.getComponents()) {
+            Point temp = endDrag;
+            int x = endDrag.x - startDrag.x;
+            int y = endDrag.y - startDrag.y;
+            if ((s.getW() + x) < 1) {
+                temp.x = startDrag.x - s.getW();
+            }
+            if ((s.getH() + y) < 1) {
+                temp.y = startDrag.y - s.getH();
+            }
+            s.setW(s.getW() + temp.x - startDrag.x);
+            s.setH(s.getH() + temp.y - startDrag.y);
+        }
     }
     public void undo(){ resize(endDrag, startDrag);}
     public void redo(){ resize(startDrag, endDrag);}

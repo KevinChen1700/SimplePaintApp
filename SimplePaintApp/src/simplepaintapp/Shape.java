@@ -42,6 +42,9 @@ public class Shape {
     
     public void draw(Graphics g){
         delegate.draw(g, x, y, w, h);
+        for(Shape s : components){
+            s.draw(g);
+        }
         for(Decorator de : decorators){
             de.draw(g);
         }
@@ -49,11 +52,26 @@ public class Shape {
     }
     
     public boolean contains(Point p){
-        System.out.print("-" + toString() + "-");
-        System.out.print("-" +  p.x + "  " + p.y + "-");
         if(p.x >= x && p.x <= (x + w) && p.y >= y && p.y <= (y + h)){return true;}
-        else{return false;}
+        for(Shape s : components){
+            if(s.contains(p)){return true;}
+        }
+        return false;
     }
+    
+    public void move(Point startDrag, Point endDrag){
+        x = x + endDrag.x - startDrag.x;
+        y = y + endDrag.y - startDrag.y;
+        
+        for (Shape s : components) {
+            s.move(startDrag, endDrag);
+            
+        }
+        for (Decorator de : decorators) {
+            de.move(endDrag.x - startDrag.x,endDrag.y - startDrag.y);
+        }
+    }
+    
     
     public void add(Shape s){components.add(s);}
     public void addText(Decorator d){decorators.add(d);}

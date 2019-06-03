@@ -27,7 +27,6 @@ public class SelectCommand implements Command {
     {
      for(Shape pt : shapes)
            if (pt.contains(startDrag)) {
-               System.out.print("BIEM");
                if (ptemp != null) 
                {
                    shapes.add(ptemp); //puts previous selection back into the paint arraylist
@@ -36,7 +35,6 @@ public class SelectCommand implements Command {
                shapes.remove(pt);
                break;
            }
-     System.out.print("REEE");
        }
     }
 

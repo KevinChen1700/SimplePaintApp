@@ -19,15 +19,17 @@ import java.util.Arrays;
  * @author Sjimmie
  */
 public class LoadCommand implements Command {
+
     private ArrayList<Shape> shapes;
     private Canvas canvas;
-    public LoadCommand(Canvas canvas){
+
+    public LoadCommand(Canvas canvas) {
         this.canvas = canvas;
         this.shapes = canvas.getShapes();
     }
-    
-    public void execute(){
-        try{
+
+    public void execute() {
+        try {
             shapes.clear();
             BufferedReader reader = new BufferedReader(new FileReader("save.txt"));
             String line = reader.readLine();
@@ -37,54 +39,76 @@ public class LoadCommand implements Command {
             groups.add(shapes);
             int groupCount = 0;
             ArrayList<Shape> currentShapes = shapes;
-            
+            RectangleDelegate delegate = RectangleDelegate.getInstance();
+            Shape tempObj = new Shape(0,0,0,0,delegate);
+
             while (line != null) {
                 String[] splitted = line.split("\\s+");
-                if("".equals(splitted[0])){splitted = Arrays.copyOfRange(splitted, 1, splitted.length);}
-                
-                if(needGroup){                 
-                    Shape tempObj = lineToShape(splitted);
+                if ("".equals(splitted[0])) {
+                    splitted = Arrays.copyOfRange(splitted, 1, splitted.length);
+                }
+
+                if (needGroup) {
+                    tempObj = lineToShape(splitted);
                     groups.get(groupCount).add(tempObj);
                     groups.add(tempObj.getComponents());
                     groupCount++;
                     needGroup = false;
                 }
                 int tempTabCount = 0;
-                for(char c : line.toCharArray()){
+                for (char c : line.toCharArray()) {
                     char s = ' ';
-                    if(' ' == c)
-                    { tempTabCount++; }
-                    else{break;}
+                    if (' ' == c) {
+                        tempTabCount++;
+                    } else {
+                        break;
+                    }
                 }
-                if(tempTabCount < tabCount){groupCount--;}
-                else if(tempTabCount > tabCount){tabCount = tempTabCount;}
-                
-                if("group".equals(splitted[0])){
+                if (tempTabCount < tabCount) {
+                    groupCount--;
+                } else if (tempTabCount > tabCount) {
+                    tabCount = tempTabCount;
+                }
+
+                if ("group".equals(splitted[0])) {
                     needGroup = true;
+                } else {
+                    if("Decorator".equals(splitted[0])){
+                        String name = "";
+                        for(int i = 1; i < splitted.length-2; i++){
+                            name += splitted[i];
+                            name += " ";
+                            
+                        }
+                        Caption caption = new Caption(name, Integer.parseInt(splitted[splitted.length-2]), Integer.parseInt(splitted[splitted.length-1]));
+                        tempObj.addText(caption);
+                    }
+                    else{
+                        tempObj = lineToShape(splitted);
+                        groups.get(groupCount).add(tempObj);
+                    }
+                    
                 }
-                else {
-                    Shape tempObj = lineToShape(splitted);
-                    groups.get(groupCount).add(tempObj);
-                }
-		// read next line
-		line = reader.readLine();
+                // read next line
+                line = reader.readLine();
             }
             reader.close();
             canvas.repaint();
-        
-        }catch(IOException e){ e.printStackTrace();}
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-    
-    private Shape lineToShape(String[] splitted){
-        if("Rectangle".equals(splitted[0])){
-                    RectangleDelegate delegate = RectangleDelegate.getInstance();
-                    Shape obj = new Shape(Integer.parseInt(splitted[1]), Integer.parseInt(splitted[2]), Integer.parseInt(splitted[3]), Integer.parseInt(splitted[4]), delegate);
-                    return obj;
-       }
-        else {
-                    EllipseDelegate delegate = EllipseDelegate.getInstance();
-                    Shape obj = new Shape(Integer.parseInt(splitted[1]), Integer.parseInt(splitted[2]), Integer.parseInt(splitted[3]), Integer.parseInt(splitted[4]), delegate);
-                    return obj;
+
+    private Shape lineToShape(String[] splitted) {
+        if ("Rectangle".equals(splitted[0])) {
+            RectangleDelegate delegate = RectangleDelegate.getInstance();
+            Shape obj = new Shape(Integer.parseInt(splitted[1]), Integer.parseInt(splitted[2]), Integer.parseInt(splitted[3]), Integer.parseInt(splitted[4]), delegate);
+            return obj;
+        } else {
+            EllipseDelegate delegate = EllipseDelegate.getInstance();
+            Shape obj = new Shape(Integer.parseInt(splitted[1]), Integer.parseInt(splitted[2]), Integer.parseInt(splitted[3]), Integer.parseInt(splitted[4]), delegate);
+            return obj;
         }
     }
 }

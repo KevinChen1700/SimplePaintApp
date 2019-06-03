@@ -34,4 +34,8 @@ public class Caption implements Decorator {
       this.x += x;
       this.y +=y;
   }
+  
+  public int getX(){return x;};
+  public int getY(){return y;};
+  public String getContent(){return t;};
 }

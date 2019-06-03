@@ -1,6 +1,9 @@
-Rectangle 777 253 207 123
-Rectangle 1070 132 106 149
-Rectangle 1042 316 70 70
-Rectangle 898 116 129 66
-Rectangle 146 52 160 127
-Rectangle 234 258 170 89
+Rectangle 280 123 412 178
+Decorator Rectangle 280 123 412 178  504 131
+Decorator Rectangle 280 123 412 178  661 182
+Decorator Rectangle 280 123 412 178  669 249
+Decorator Rectangle 280 123 412 178  509 278
+Decorator Rectangle 280 123 412 178  430 292
+Decorator Rectangle 280 123 412 178  329 279
+Decorator Rectangle 280 123 412 178  321 197
+Decorator Rectangle 280 123 412 178  342 175

@@ -14,4 +14,7 @@ import java.awt.Graphics;
 public interface Decorator {
     public void draw(Graphics g);
     public void move(int x, int y);
+    public int getX();
+    public int getY();
+    public String getContent();
 }
