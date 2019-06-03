@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.FlowLayout;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -25,6 +26,7 @@ public class GUI extends JFrame {
     private Canvas canvas;
     Invoker invoker = new Invoker();
     VisitorOperations visitor = new VisitorOperations();
+    private Graphics2D g;   
 
     //main function that starts the program
     public static void main(String[] args) {
@@ -153,7 +155,7 @@ public class GUI extends JFrame {
         JButton btnCap = new JButton("Caption");
         btnCap.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                canvas.setAction("caption");
+             canvas.setAction("caption");
             }
         });
         panel.add(btnCap);

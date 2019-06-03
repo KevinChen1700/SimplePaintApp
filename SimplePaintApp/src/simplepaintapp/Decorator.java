@@ -5,10 +5,14 @@
  */
 package simplepaintapp;
 
+import java.awt.Graphics;
+
 /**
  *
  * @author Kevin
  */
-public class addCaption {
+public interface Decorator {
+    public void draw(Graphics g);
+    public void move(int x, int y);
     
 }

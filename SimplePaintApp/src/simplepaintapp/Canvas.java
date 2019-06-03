@@ -31,9 +31,14 @@ public class Canvas extends JComponent {
                     SelectCommand select = new SelectCommand(shapes, startDrag);
                     invoker.execute(select);
                 }
-                else if(action == "add"){
+                if(action == "add"){
                     AddCommand add = new AddCommand(ptemp, shapes, startDrag);
                     invoker.execute(add);
+                }
+                else if(action == "caption"){
+                    Caption caption = new Caption(ptemp.toString(), startDrag.x, startDrag.y);
+                    AddDecorator addDec = new AddDecorator(ptemp.getDecorators(), caption);
+                    invoker.execute(addDec);
                 }
             }
             

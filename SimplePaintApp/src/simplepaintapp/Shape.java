@@ -20,6 +20,7 @@ public class Shape {
     private int h;
     private Strategy delegate;
     private ArrayList<Shape> components = new ArrayList<Shape>();
+    private ArrayList<Decorator> decorators = new ArrayList<Decorator>();
     
     public Shape(int x, int y, int w, int h, Strategy delegate ){
         this.x = x;
@@ -39,7 +40,13 @@ public class Shape {
     public int getH(){return h;}
     public int getW(){return w;}
     
-    public void draw(Graphics g){delegate.draw(g, x, y, w, h);}
+    public void draw(Graphics g){
+        delegate.draw(g, x, y, w, h);
+        for(Decorator de : decorators){
+            de.draw(g);
+        }
+    
+    }
     
     public boolean contains(Point p){
         System.out.print("-" + toString() + "-");
@@ -49,7 +56,9 @@ public class Shape {
     }
     
     public void add(Shape s){components.add(s);}
+    public void addText(Decorator d){decorators.add(d);}
     public ArrayList<Shape> getComponents(){return components;} 
+    public ArrayList<Decorator> getDecorators(){return decorators;} 
     
     public String toString(){return delegate.toString() + " " + x + " " + y + " " + w + " " + h;}
     
