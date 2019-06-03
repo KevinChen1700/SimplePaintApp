@@ -85,7 +85,7 @@ public class LoadCommand implements Command {
                 }
         else {
                     MyEllipse obj = new MyEllipse();
-                    Ellipse2D elip = new Ellipse2D.Float(Integer.parseInt(splitted[1+tabCount]), Integer.parseInt(splitted[2+tabCount]), Integer.parseInt(splitted[3+tabCount]), Integer.parseInt(splitted[4+tabCount]));
+                    Ellipse2D elip = new Ellipse2D.Float(Integer.parseInt(splitted[1]), Integer.parseInt(splitted[2]), Integer.parseInt(splitted[3]), Integer.parseInt(splitted[4]));
                     obj.setEllipse(elip);
                     return obj;
                 
