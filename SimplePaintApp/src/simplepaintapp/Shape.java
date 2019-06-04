@@ -95,23 +95,28 @@ public class Shape {
         }
     }
 
+    //add object to the components group
     public void add(Shape s) {
         components.add(s);
-    }   //add object to the components group
+    }  
 
+    // add text to the decorators group
     public void addText(Decorator d) {
         decorators.add(d);
-    }  // add text to the decorators group
-
+    }  
+    
+     //get the objects in the components group
     public ArrayList<Shape> getComponents() {
         return components;
-    }   //get the objects in the components group
+    } 
 
+     //get the texts in the decorators group
     public ArrayList<Decorator> getDecorators() {
         return decorators;
-    }   //get the texts in the decorators group
+    }  
 
+     //Make a string with all the values of the object
     public String toString() {
         return delegate.toString() + " " + x + " " + y + " " + w + " " + h;
-    }  //Make a string with all the values of the object
+    }
 }
