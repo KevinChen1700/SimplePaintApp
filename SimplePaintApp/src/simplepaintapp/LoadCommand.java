@@ -7,9 +7,10 @@ import java.util.ArrayList;
 import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
 
+//command for getting the contents in save.txt and turning it back into objects and load into the app
 public class LoadCommand implements Command {
 
-    private ArrayList<DrawAbleShape> shapes;
+    private ArrayList<DrawAbleShape> shapes;     //to hold all of the objects that was created from Shape class
     private Canvas canvas;
 
     public LoadCommand(Canvas canvas) {
@@ -20,7 +21,7 @@ public class LoadCommand implements Command {
     public void execute() {
         try {
             shapes.clear();
-            BufferedReader reader = new BufferedReader(new FileReader("save.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("save.txt"));     //reader to read all text in save.txt
             String line = reader.readLine();
             while (line != null) {
                 String[] splitted = line.split(" ");

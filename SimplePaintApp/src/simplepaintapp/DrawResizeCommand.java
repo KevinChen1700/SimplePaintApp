@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 
+//command for animation of resizing object using graphics 
 public class DrawResizeCommand implements Command {
 
     private DrawAbleShape obj;

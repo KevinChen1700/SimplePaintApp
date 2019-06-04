@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+//class to make rectangle and its functions
 public class MyRectangle implements DrawAbleShape {
 
     private Rectangle rect;

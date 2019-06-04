@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+//command for saving into file save.txt
 public class SaveCommand implements Command {
 
     private ArrayList<DrawAbleShape> shapes;

@@ -13,7 +13,7 @@ public class GUI extends JFrame {
     private static GUI frame;
     private JPanel contentPane;
     private Canvas canvas;
-    Invoker invoker = new Invoker();
+    Invoker invoker = new Invoker();     //invoker to execute undo and redo
 
     //main function that starts the program
     public static void main(String[] args) {
@@ -22,6 +22,8 @@ public class GUI extends JFrame {
     }
 
     public GUI() {
+        
+         //making the gui of the app
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("SimplePaintApp");
         setSize(1200, 500);
@@ -38,11 +40,11 @@ public class GUI extends JFrame {
         JPanel panel = new JPanel();
         contentPane.add(panel, BorderLayout.NORTH);
 
-        //buttons 
+         //make buttons and give them function for when they are clicked
         JButton btnRect = new JButton("Rectangle");
         btnRect.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                canvas.setAction("Rectangle");
+                canvas.setAction("Rectangle");       //send the corresponding string when a button is clicked
             }
         });
         panel.add(btnRect);
