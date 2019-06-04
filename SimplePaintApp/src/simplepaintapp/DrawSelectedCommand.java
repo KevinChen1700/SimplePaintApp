@@ -6,20 +6,19 @@
 package simplepaintapp;
 
 import java.awt.Color;
-import java.awt.Graphics2D;
+import static simplepaintapp.Canvas.g;
+import static simplepaintapp.Canvas.ptemp;
 
+
+/**
+ *
+ * @author Kevin
+ */
 public class DrawSelectedCommand implements Command {
-
-    private DrawAbleShape obj;
-    private Graphics2D g;
-
-    public DrawSelectedCommand(DrawAbleShape obj, Graphics2D g) {
-        this.obj = obj;
-        this.g = g;
-    }
-
-    public void execute() {
-        g.setColor(Color.RED);
-        obj.draw(g);
+    
+    public void execute()
+    {
+      g.setColor(Color.RED);
+      ptemp.draw(g);
     }
 }

@@ -5,18 +5,22 @@
  */
 package simplepaintapp;
 
-import static simplepaintapp.Canvas.pt;
+import static simplepaintapp.Canvas.endDrag;
+import static simplepaintapp.Canvas.startDrag;
 import static simplepaintapp.Canvas.g;
-
-
 /**
  *
  * @author Kevin
  */
-public class DrawShapesCommand implements Command {
+public class DrawEllip implements Command {
+    private MyEllipse obj;
+    public DrawEllip(MyEllipse obj){
+    this.obj = obj;
+    }
     
     public void execute()
     {
-      pt.draw(g);
+      obj.makeObject(startDrag, endDrag);
+      obj.draw(g);
     }
 }

@@ -38,11 +38,11 @@ public class MyRectangle implements DrawAbleShape {
     //draws a resized version of the object but this version can't have a width and/or height of less than 1
     @Override
     public void drawExpand(Graphics2D g, int w, int h ) {
-        int w2 = rect.width + w;
-        int h2 = rect.height + h;
+        w = rect.width + w;
+        h = rect.height + h;
         if (w < 1) w=1;
         if (h < 1) h =1;
-        g.drawRect(rect.x, rect.y, w2, h2);
+        g.drawRect(rect.x, rect.y, w, h);
         for(DrawAbleShape pt : components){pt.drawExpand(g, w, h); }
     }
 

@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package simplepaintapp;
 
 import java.io.FileNotFoundException;
@@ -7,15 +12,18 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ *
+ * @author Sjimmie
+ */
 public class SaveCommand implements Command {
-
+    
     private ArrayList<DrawAbleShape> shapes;
-
-    public SaveCommand(ArrayList<DrawAbleShape> shapes) {
+    public SaveCommand(ArrayList<DrawAbleShape> shapes){
         this.shapes = shapes;
     }
-
-    public void execute() {
+    
+    public void execute(){
         try {
             PrintWriter writer = new PrintWriter("save.txt", "UTF-8");
             
@@ -71,5 +79,5 @@ public class SaveCommand implements Command {
             }
     
     }
-
+    
 }

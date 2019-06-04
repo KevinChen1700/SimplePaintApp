@@ -1,25 +1,33 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package simplepaintapp;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
 import java.util.Arrays;
 
+/**
+ *
+ * @author Sjimmie
+ */
 public class LoadCommand implements Command {
-
     private ArrayList<DrawAbleShape> shapes;
     private Canvas canvas;
-
-    public LoadCommand(Canvas canvas) {
+    public LoadCommand(Canvas canvas){
         this.canvas = canvas;
         this.shapes = canvas.getShapes();
     }
-
-    public void execute() {
-        try {
+    
+    public void execute(){
+        try{
             shapes.clear();
             BufferedReader reader = new BufferedReader(new FileReader("save.txt"));
             String line = reader.readLine();
@@ -59,15 +67,13 @@ public class LoadCommand implements Command {
                     groups.get(groupCount).add(tempObj);
                 
                 }
-                // read next line
-                line = reader.readLine();
+		// read next line
+		line = reader.readLine();
             }
             reader.close();
             canvas.repaint();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        
+        }catch(IOException e){ e.printStackTrace();}
     }
     
     private DrawAbleShape lineToShape(String[] splitted){
