@@ -1,19 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package simplepaintapp;
 
-import static simplepaintapp.Canvas.pt;
-import static simplepaintapp.Canvas.g;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
-
-/**
- *
- * @author Kevin
- */
 public class DrawShapesCommand implements Command {
+    private DrawAbleShape pt;
+    private Graphics2D g;
+    public DrawShapesCommand(DrawAbleShape pt, Graphics2D g)
+    {
+        this.pt = pt;
+        this.g = g;
+    }
     
     public void execute()
     {
