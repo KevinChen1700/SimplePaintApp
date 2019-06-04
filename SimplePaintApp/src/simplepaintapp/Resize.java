@@ -1,16 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package simplepaintapp;
 
 import java.awt.Point;
 
-/**
- *
- * @author Kevin
- */
+//resize class with constructor to get values for resize functionality
 public class Resize extends ObjectCommand implements Visitable {
     private Point startDrag;
     private Point endDrag ;
@@ -51,6 +43,8 @@ public class Resize extends ObjectCommand implements Visitable {
         object.setW(object.getW()+endDrag.x - startDrag.x);
         object.setH(object.getH()+endDrag.y - startDrag.y);
     }
+    
+    //add undo and redo functionality
     public void undo(){ resize(endDrag, startDrag);}
     public void redo(){ resize(startDrag, endDrag);}
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package simplepaintapp;
 
 import java.io.BufferedReader;
@@ -14,12 +9,8 @@ import java.awt.Rectangle;
 import java.awt.geom.Ellipse2D;
 import java.util.Arrays;
 
-/**
- *
- * @author Sjimmie
- */
 public class LoadCommand implements Command {
-    private ArrayList<Shape> shapes;
+    private ArrayList<Shape> shapes;     //to hold all of the objects that was created from Shape class
     private Canvas canvas;
     public LoadCommand(Canvas canvas){
         this.canvas = canvas;
@@ -29,14 +20,13 @@ public class LoadCommand implements Command {
     public void execute(){
         try{
             shapes.clear();
-            BufferedReader reader = new BufferedReader(new FileReader("save.txt"));
+            BufferedReader reader = new BufferedReader(new FileReader("save.txt"));     //reader to read all text in save.txt
             String line = reader.readLine();
             int tabCount = 0;
             boolean needGroup = false;
-            ArrayList<ArrayList<Shape>> groups = new ArrayList();
+            ArrayList<ArrayList<Shape>> groups = new ArrayList();      //to hold all grouped objects that was 
             groups.add(shapes);
             int groupCount = 0;
-            ArrayList<Shape> currentShapes = shapes;
             
             while (line != null) {
                 String[] splitted = line.split("\\s+");

@@ -11,16 +11,17 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 public class Canvas extends JComponent {
-    private RectangleDelegate rectangle = RectangleDelegate.getInstance();
-    private EllipseDelegate ellipse = EllipseDelegate.getInstance();
-    private String action ="";
+    private RectangleDelegate rectangle = RectangleDelegate.getInstance();   //through instance of singleton, make a rectangle
+    private EllipseDelegate ellipse = EllipseDelegate.getInstance();         //through instance of singleton, make a ellipse
+    private String action ="";           //this string will be used for our functions depending on what sits inside the string
     private ArrayList<Shape> shapes = new ArrayList<>(); //ArrayList of all rectangles and ellipses made
     private Point startDrag, endDrag;    //remember coordinates of cursor when mouse is being clicked and dragged
     public static Shape ptemp;                 //placeholder for object when editing a object
     private Graphics2D g;                   // used to draw the objects
-    private Invoker invoker;
-    private VisitorOperations visitor = new VisitorOperations();
+    private Invoker invoker;             //invoker used for command executes
+    private VisitorOperations visitor = new VisitorOperations();      //visitor used for move,resize and save
         
+     //functions for when mouse is pressed
     public Canvas(Invoker invoker) {
         this.invoker = invoker;
         this.addMouseListener(new MouseAdapter() {
@@ -70,11 +71,11 @@ public class Canvas extends JComponent {
         });
 
     }
-
+        //change the action string to the corresponding action
         public void setAction(String action){
         this.action=action;
     }
-    
+     //get the shapes
     public ArrayList<Shape> getShapes(){
         return shapes;
     }
@@ -89,6 +90,8 @@ public class Canvas extends JComponent {
             DrawShapeCommand drawShape = new DrawShapeCommand(pt, g);
             invoker.execute(drawShape);
         }
+        
+        //draw animation for rectangle and ellipse
         if (startDrag != null && endDrag != null && action != "select") {
             if (action == "Rectangle") {
                 Shape obj = new Shape(Math.min(startDrag.x, endDrag.x), Math.min(startDrag.y, endDrag.y), Math.abs(startDrag.x - endDrag.x), Math.abs(startDrag.y - endDrag.y), rectangle);
@@ -99,6 +102,8 @@ public class Canvas extends JComponent {
                 DrawShapeCommand drawShape = new DrawShapeCommand(obj, g);
                 invoker.execute(drawShape);
             }
+            
+             //draw animation for move and resize
             if (ptemp != null) {
                 if (ptemp.contains(startDrag)) {
                     if (action == "move") {
