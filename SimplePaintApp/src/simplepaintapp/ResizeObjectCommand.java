@@ -2,6 +2,7 @@ package simplepaintapp;
 
 import java.awt.Point;
 
+//command to resize the object
 public class ResizeObjectCommand extends ObjectCommand {
 
     private Point startDrag;
@@ -18,6 +19,7 @@ public class ResizeObjectCommand extends ObjectCommand {
         object.resize(startDrag, endDrag);
     }
 
+    //undo and redo functionality
     public void undo() {
         object.resize(endDrag, startDrag);
     }

@@ -3,6 +3,7 @@ package simplepaintapp;
 import java.awt.Graphics2D;
 import java.awt.Point;
 
+//command for animation of drawing object using graphics 
 public class DrawObjCommand implements Command {
 
     private DrawAbleShape obj;

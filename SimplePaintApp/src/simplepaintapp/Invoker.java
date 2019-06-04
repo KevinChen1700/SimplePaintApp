@@ -2,6 +2,7 @@ package simplepaintapp;
 
 import java.util.Stack;
 
+//invoker class with execute, undo and redo functionality
 public class Invoker {
 
     private Stack<Command> undoStack = new Stack();
@@ -9,6 +10,8 @@ public class Invoker {
 
     public void execute(Command action) {
         action.execute();
+        
+         //only push into undoStack if the command is an extension of ObjectCommand
         if (action instanceof ObjectCommand) {
             undoStack.push(action);
         }
@@ -18,7 +21,7 @@ public class Invoker {
         if (!(undoStack.isEmpty())) {
             Command command = undoStack.pop();
             ((ObjectCommand) command).undo();
-            redoStack.push(command);
+            redoStack.push(command);     //push the popped command from undostack into redostack for redo functionality
         }
     }
 
@@ -26,7 +29,7 @@ public class Invoker {
         if (!redoStack.isEmpty()) {
             Command command = redoStack.pop();
             ((ObjectCommand) command).redo();
-            undoStack.push(command);
+            undoStack.push(command);    //push the popped command from redostack into undostack for undo functionality
         }
     }
 }

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 
+//command for animation of move function using graphics 
 public class DrawMoveCommand implements Command {
 
     private DrawAbleShape obj;

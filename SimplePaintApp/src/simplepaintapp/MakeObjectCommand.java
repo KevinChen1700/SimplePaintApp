@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import javax.swing.JComponent;
 
+//command to add the object into shapes arraylist
 public class MakeObjectCommand extends ObjectCommand {
 
     private DrawAbleShape obj;

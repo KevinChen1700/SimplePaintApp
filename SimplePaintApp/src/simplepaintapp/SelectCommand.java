@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import static simplepaintapp.Canvas.ptemp;
 
+//Command with functionality for when an object is selected
 public class SelectCommand implements Command {
 
     private ArrayList<DrawAbleShape> shapes;

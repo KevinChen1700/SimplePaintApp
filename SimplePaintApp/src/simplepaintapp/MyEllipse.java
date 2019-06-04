@@ -5,6 +5,7 @@ import java.awt.geom.Ellipse2D;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
+//class to make ellipse and its functions
 public class MyEllipse implements DrawAbleShape {
 
     private Ellipse2D elip;

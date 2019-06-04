@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
+//class to make rectangle and its functions
 public class MyRectangle implements DrawAbleShape {
 
     private Rectangle rect;

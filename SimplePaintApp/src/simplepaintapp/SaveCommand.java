@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+ //convert all the values of the objects into a string and remember it
 public class SaveCommand implements Command {
 
     private ArrayList<DrawAbleShape> shapes;

@@ -8,6 +8,7 @@ package simplepaintapp;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+//command for drawing the selected objects
 public class DrawSelectedCommand implements Command {
 
     private DrawAbleShape obj;
