@@ -1,17 +1,16 @@
 package simplepaintapp;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 
-public class DrawResizeCommand implements Command {
+public class DrawObjCommand implements Command {
 
     private DrawAbleShape obj;
     private Graphics2D g;
     private Point startDrag;
     private Point endDrag;
 
-    public DrawResizeCommand(DrawAbleShape obj, Graphics2D g, Point startDrag, Point endDrag) {
+    public DrawObjCommand(DrawAbleShape obj, Graphics2D g, Point startDrag, Point endDrag) {
         this.obj = obj;
         this.g = g;
         this.startDrag = startDrag;
@@ -19,9 +18,7 @@ public class DrawResizeCommand implements Command {
     }
 
     public void execute() {
-        g.setColor(Color.RED);
-        int w = endDrag.x - startDrag.x;
-        int h = endDrag.y - startDrag.y;
-        obj.drawExpand(g, w, h);
+        obj.makeObject(startDrag, endDrag);
+        obj.draw(g);
     }
 }

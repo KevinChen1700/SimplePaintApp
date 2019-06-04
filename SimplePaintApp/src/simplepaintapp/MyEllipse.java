@@ -1,11 +1,7 @@
 package simplepaintapp;
 
-import java.awt.Color;
 import java.awt.Point;
 import java.awt.geom.Ellipse2D;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 public class MyEllipse implements DrawAbleShape {
