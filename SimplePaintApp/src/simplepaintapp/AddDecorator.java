@@ -1,18 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package simplepaintapp;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author Kevin
- */
+//addDecorator class for making grouped texts for an object
 public class AddDecorator extends ObjectCommand {
-    ArrayList<Decorator> decorators;
+    ArrayList<Decorator> decorators;    //arraylist for grouped texts
     Decorator decorator;
     public AddDecorator(ArrayList<Decorator> decorators, Decorator decorator  )
     {
@@ -22,9 +14,11 @@ public class AddDecorator extends ObjectCommand {
     
     public void execute()
     {
-        decorators.add(decorator);
+        decorators.add(decorator);     //add the single text to the grouped text
     }
     
+    
+    //undo redo function for the texts
     public void undo(){decorators.remove(decorator);}
     public void redo(){decorators.add(decorator);}
 }

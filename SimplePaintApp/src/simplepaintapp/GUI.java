@@ -24,9 +24,8 @@ public class GUI extends JFrame {
     private static GUI frame;
     private JPanel contentPane;
     private Canvas canvas;
-    Invoker invoker = new Invoker();
-    VisitorOperations visitor = new VisitorOperations();
-    private Graphics2D g;   
+    Invoker invoker = new Invoker();       //invoker to execute undo and redo
+    VisitorOperations visitor = new VisitorOperations();       //visitor to save to file
 
     //main function that starts the program
     public static void main(String[] args) {
@@ -35,11 +34,13 @@ public class GUI extends JFrame {
     }
 
     public GUI() {
+
+        //making the gui of the app
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("SimplePaintApp");
         setSize(1200, 500);
         setMinimumSize(getSize());
-        
+
         canvas = new Canvas(invoker);
 
         //panel that holds both the buttons and the canvas
@@ -51,11 +52,11 @@ public class GUI extends JFrame {
         JPanel panel = new JPanel();
         contentPane.add(panel, BorderLayout.NORTH);
 
-        //buttons 
+        //make buttons and give them function for when they are clicked
         JButton btnRect = new JButton("Rectangle");
         btnRect.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-                canvas.setAction("Rectangle");
+                canvas.setAction("Rectangle");      //send the corresponding string when a button is clicked
             }
         });
         panel.add(btnRect);
@@ -67,7 +68,7 @@ public class GUI extends JFrame {
             }
         });
         panel.add(btnEllipse);
-        
+
         JButton btnEmptySpace = new JButton("");
         panel.add(btnEmptySpace);
 
@@ -94,10 +95,10 @@ public class GUI extends JFrame {
             }
         });
         panel.add(btnResize);
-        
+
         JButton btnEmptySpace2 = new JButton("");
         panel.add(btnEmptySpace2);
-        
+
         JButton btnUndo = new JButton("Undo");
         btnUndo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
@@ -106,7 +107,7 @@ public class GUI extends JFrame {
             }
         });
         panel.add(btnUndo);
-        
+
         JButton btnRedo = new JButton("Redo");
         btnRedo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
@@ -115,20 +116,20 @@ public class GUI extends JFrame {
             }
         });
         panel.add(btnRedo);
-        
+
         JButton btnEmptySpace3 = new JButton("");
         panel.add(btnEmptySpace3);
-        
+
         JButton btnSave = new JButton("Save");
         btnSave.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 VisitorSave saveFile = new VisitorSave(canvas.getShapes());
                 visitor.visitSave(saveFile);
-                
+
             }
         });
         panel.add(btnSave);
-        
+
         JButton btnLoad = new JButton("Load");
         btnLoad.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
@@ -137,10 +138,10 @@ public class GUI extends JFrame {
             }
         });
         panel.add(btnLoad);
-        
+
         JButton btnEmptySpace4 = new JButton("");
         panel.add(btnEmptySpace4);
-        
+
         JButton btnAdd = new JButton("Add");
         btnAdd.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
@@ -148,19 +149,17 @@ public class GUI extends JFrame {
             }
         });
         panel.add(btnAdd);
-        
+
         JButton btnEmptySpace5 = new JButton("");
         panel.add(btnEmptySpace5);
-        
+
         JButton btnCap = new JButton("Caption");
         btnCap.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
-             canvas.setAction("caption");
+                canvas.setAction("caption");
             }
         });
         panel.add(btnCap);
-        
-        
 
         //adds canvas below the buttons
         contentPane.add(canvas, BorderLayout.CENTER);

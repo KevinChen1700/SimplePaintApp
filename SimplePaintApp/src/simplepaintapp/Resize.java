@@ -1,27 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package simplepaintapp;
 
 import java.awt.Point;
 
-/**
- *
- * @author Kevin
- */
+//resize class with constructor to get values for resize functionality
 public class Resize extends ObjectCommand implements Visitable {
+
     private Point startDrag;
-    private Point endDrag ;
+    private Point endDrag;
     private Shape object;
-    
-    public Resize(Point startDrag, Point endDrag, Shape object)
-    {
-         this.startDrag = startDrag;
-         this.endDrag = endDrag;
-         this.object = object;
-         
+
+    public Resize(Point startDrag, Point endDrag, Shape object) {
+        this.startDrag = startDrag;
+        this.endDrag = endDrag;
+        this.object = object;
+
         int x = endDrag.x - startDrag.x;
         int y = endDrag.y - startDrag.y;
         if ((object.getW() + x) < 1) {
@@ -31,25 +23,27 @@ public class Resize extends ObjectCommand implements Visitable {
             endDrag.y = startDrag.y - object.getH();
         }
     }
-    
+
     //accept the visitor
     public void accept(Visitor visitor) {
-    visitor.visitResize(this);
+        visitor.visitResize(this);
     }
-    
-    public Point getStartDrag(){
+
+    public Point getStartDrag() {
         return startDrag;
     }
-    public Point getEndDrag(){
-         return endDrag;
+
+    public Point getEndDrag() {
+        return endDrag;
     }
-    public Shape getObject(){
-         return object;
+
+    public Shape getObject() {
+        return object;
     }
-    
-    private void resize(Point startDrag, Point endDrag){
-        object.setW(object.getW()+endDrag.x - startDrag.x);
-        object.setH(object.getH()+endDrag.y - startDrag.y);
+
+    private void resize(Point startDrag, Point endDrag) {
+        object.setW(object.getW() + endDrag.x - startDrag.x);
+        object.setH(object.getH() + endDrag.y - startDrag.y);
         for (Shape s : object.getComponents()) {
             Point temp = endDrag;
             int x = endDrag.x - startDrag.x;
@@ -64,6 +58,13 @@ public class Resize extends ObjectCommand implements Visitable {
             s.setH(s.getH() + temp.y - startDrag.y);
         }
     }
-    public void undo(){ resize(endDrag, startDrag);}
-    public void redo(){ resize(startDrag, endDrag);}
+
+    //add undo and redo functionality
+    public void undo() {
+        resize(endDrag, startDrag);
+    }
+
+    public void redo() {
+        resize(startDrag, endDrag);
+    }
 }
